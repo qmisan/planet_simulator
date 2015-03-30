@@ -67,17 +67,17 @@ class MainWindow(wx.Frame):
         self.toolbar = self.CreateToolBar()
         self.toolbar.SetToolBitmapSize((20, 10))  # Button size in pixels?
         # Creating 'RUN' button to toolbar. Bitmap needs path from main
-        runTool = self.toolbar.AddLabelTool(self.ID_RUN_BUTTON,
-                                            'Run Simulation',
-                                            wx.Bitmap('GUI/run_button.png'))
-        # TODO: Event handling to 'RUN'
+        toolItem = self.toolbar.AddLabelTool(self.ID_RUN_BUTTON,
+                                             'Run Simulation',
+                                             wx.Bitmap('GUI/run_button.png'))
+        self.Bind(wx.EVT_MENU, self.OnRun, toolItem)
+
         # Creating 'Pause' button to toolbar. Bitmap needs path from main
-        pauseTool = self.toolbar.AddLabelTool(
+        toolItem = self.toolbar.AddLabelTool(
                                              self.ID_PAUSE_BUTTON,
                                              'Pause Simulation',
                                              wx.Bitmap('GUI/pause_button.png'))
-
-        # TODO: Event handling to 'PAUSE'
+        self.Bind(wx.EVT_MENU, self.OnPause, toolItem)
 
         self.toolbar.Realize()  # IDIOT U FORGOT TO SHOW IT!!!!!
 
@@ -133,6 +133,34 @@ class MainWindow(wx.Frame):
 
     def OnExit(self, event):
         self.Close(True)
+
+    def OnRun(self, event):
+        simulation_speed = 0
+        simulation_timestep = 0
+
+        # Asking simulation speed
+        dlg = wx.TextEntryDialog(None,
+                                 "Set parameters for simulation",
+                                 "Run")
+        dlg.SetValue("Simulation Speed")
+
+        if dlg.ShowModal() == wx.ID_OK:
+            simulation_speed = dlg.GetValue()
+
+        # Asking timestep
+        dlg2 = wx.TextEntryDialog(None,
+                                  "Still need timestep",
+                                  "Run")
+        dlg2.SetValue("Simulation Timestep")
+
+        if dlg2.ShowModal == wx.ID_OK:
+            simulation_timestep = dlg2.GetValue()
+            dlg2.Destroy()
+        print("Speed:" + str(simulation_speed) + "\nStep:"
+              + str(simulation_timestep))
+
+    def OnPause(self, event):
+        pass
 
 if __name__ == '__main__':
     app = wx.App(False)  # Always needs this
