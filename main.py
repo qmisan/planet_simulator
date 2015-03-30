@@ -1,14 +1,16 @@
 from GUI.mainWindow import MainWindow
-from visual import *
-
+import wx
 
 """
 This file works as a interface between
  GUI Simulation and Visualization
 """
 
+
 def main():
-    mainframe = MainFrame()
+    app = wx.App(False)  # Always needs this
+    MainWindow("Planet simulator")
+    app.MainLoop()
 
 if __name__ == '__main__':
     main()
