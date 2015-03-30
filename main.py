@@ -1,4 +1,4 @@
-from GUI.mainWindow import MainWindow
+from GUI.mainWindow import *
 import wx
 
 """
