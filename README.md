@@ -5,17 +5,18 @@ This is the README of "Ohjelmoinnin Peruskurssi Y2"- project. I implement an pla
 The file structure of project might change later but for now it will be like this
 
 - Simulation/
-  	simulation.py
-  	space.py
-  	element.py
-  	planet.py
-  	satellite.py
-  	physics.py	
+	- simulation.py
+	- space.py
+	- element.py
+	- planet.py
+	- satellite.py
+	- physics.py	
 
 - GUI/
-  	mainframe.py
+	- mainframe.py
+
 - Visualization/
 
 - Documentation/
-  	overall_plan
-  	technical_plan
+  	- overall_plan
+  	- technical_plan
