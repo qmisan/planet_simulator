@@ -1,0 +1,14 @@
+# Testi filu simulaation luomiseen
+# Parametrit muodossa:
+# Tyyppi label position(muodossa: x,y,z) velocity(x,y,z) mass color
+#
+# Planet1
+Star Aurinko 0,0,0 0,0,0 20 yellow
+# Planet2
+Planet Maa 0,100,0 1,0,0 40 red
+# Planet3
+Planet Bemu 0,-30,0 -1,0,0 30 cyan
+# Planet4
+Planet kolmas 0,0,20 0,1,0 10 cyan
+# HOMO
+# Planet HOMO 1,10,0 0,0,0 20 magenta

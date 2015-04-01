@@ -1,0 +1,1329 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"simulation",
+				"simulation_timestep	statement"
+			],
+			[
+				"simu",
+				"simulation_timestep	statement"
+			],
+			[
+				"simulati",
+				"simulation_timestep	statement"
+			],
+			[
+				"TextEn",
+				"TextEntryDialog	class"
+			],
+			[
+				"tool",
+				"toolItem	statement"
+			],
+			[
+				"Main",
+				"MainWindow	class"
+			],
+			[
+				"VIsua",
+				"visualization〔module〕"
+			],
+			[
+				"mass",
+				"mass_scale"
+			],
+			[
+				"print",
+				"print〔function〕"
+			],
+			[
+				"line",
+				"line_data〔variable〕"
+			],
+			[
+				"or",
+				"orbital2〔variable〕"
+			],
+			[
+				"vis",
+				"visualization"
+			],
+			[
+				"wid",
+				"width"
+			],
+			[
+				"if",
+				"ifmain	if __name__ == '__main__'"
+			],
+			[
+				"next",
+				"next_vel〔variable〕"
+			],
+			[
+				"acceleration",
+				"acceleration[1]*dt**2"
+			],
+			[
+				"P",
+				"Planet([3,1,2],500,\"South"
+			],
+			[
+				"a",
+				"acceleration"
+			],
+			[
+				"po",
+				"position"
+			],
+			[
+				"None",
+				"None〔variable〕"
+			],
+			[
+				"def",
+				"def〔keyword〕"
+			],
+			[
+				"velocity",
+				"velocity〔argument〕"
+			],
+			[
+				"Vide",
+				"VideoSection〔module〕"
+			],
+			[
+				"section",
+				"section1〔variable〕"
+			],
+			[
+				"video",
+				"video_track"
+			],
+			[
+				"prin",
+				"print〔function〕"
+			],
+			[
+				"add",
+				"add_section	function"
+			],
+			[
+				"sec",
+				"section_to_remove"
+			],
+			[
+				"old",
+				"old_index"
+			],
+			[
+				"sectio",
+				"section_list"
+			],
+			[
+				"section_",
+				"section_to_remove"
+			],
+			[
+				"Video",
+				"VideoTrack"
+			],
+			[
+				"remove",
+				"remove_action"
+			],
+			[
+				"re",
+				"remove_action"
+			],
+			[
+				"is",
+				"is_finnish_diphthong〔function〕"
+			],
+			[
+				"next_",
+				"next_vowel"
+			],
+			[
+				"ne",
+				"get_next_consonant〔function〕"
+			],
+			[
+				"g",
+				"get_next_consonant〔function〕"
+			],
+			[
+				"pr",
+				"previous_hyphen_at"
+			],
+			[
+				"get",
+				"get_next_vowel〔function〕"
+			],
+			[
+				"n",
+				"get_next_vowel〔function〕"
+			],
+			[
+				"cond",
+				"cond_c"
+			],
+			[
+				"p",
+				"previous_hyphen_at"
+			],
+			[
+				"previous",
+				"previous_hyphen_at〔argument〕"
+			],
+			[
+				"Finnis",
+				"FinnishHyphenationRule〔module〕"
+			],
+			[
+				"nex",
+				"next_hyphen"
+			],
+			[
+				"third",
+				"third_location"
+			],
+			[
+				"random",
+				"random_seed"
+			],
+			[
+				"nei",
+				"neighbor_loc"
+			],
+			[
+				"root",
+				"root"
+			],
+			[
+				"knows",
+				"knows_root"
+			],
+			[
+				"item",
+				"item_count"
+			],
+			[
+				"NOT",
+				"not_found"
+			],
+			[
+				"hash",
+				"hash_to_test"
+			],
+			[
+				"has",
+				"hash_to_test"
+			],
+			[
+				"insert",
+				"insert"
+			],
+			[
+				"Has",
+				"HashableString"
+			],
+			[
+				"test",
+				"test_next_prime"
+			],
+			[
+				"dele",
+				"delete"
+			],
+			[
+				"as",
+				"assertEqual"
+			],
+			[
+				"Ha",
+				"HashableString"
+			],
+			[
+				"not",
+				"not_found"
+			],
+			[
+				"fals",
+				"False"
+			],
+			[
+				"sqrt",
+				"sqrtroot"
+			],
+			[
+				"sqr",
+				"sqrtroot"
+			],
+			[
+				"s",
+				"sqrtroot"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"contents": "import wx  # wx.Frame etc\nimport os  # To get path for \"Open file\"\n\nfrom Simulation.simulation import Simulation\n\n\nclass MainWindow(wx.Frame):\n\n    # ID LIST FOR BUTTONS\n    ID_RUN_BUTTON = wx.NewId()\n    ID_PAUSE_BUTTON = wx.NewId()\n    ID_TOOLBAR = wx.NewId()\n\n    def __init__(self, title):\n\n        # Frame initialization\n\n        # Get local display size\n        local_display_size = wx.GetDisplaySize()\n\n        #  Initialize mainwindow with size 0.5 * width\n        #  and full height of local display\n        wx.Frame.__init__(self, parent=None, title=title,\n                          size=(local_display_size[0]/2,\n                                0.8*local_display_size[1]), pos=(0, 0))\n\n        #  Setting up the menu.\n        #  --------------------------------\n        filemenu = wx.Menu()\n\n        # Adding \"About\" menuItem and setting event\n        menuItem = filemenu.Append(wx.ID_ABOUT, \"&About\",\n                                   \"Information about this program\")\n        self.Bind(wx.EVT_MENU, self.OnAbout, menuItem)\n\n        # Adding \"Open\" and setting event\n        menuItem = filemenu.Append(wx.ID_OPEN, \"&Open\",\n                                   \"Open simulation state from file\")\n        self.Bind(wx.EVT_MENU, self.OnOpen, menuItem)\n\n        # Adding \"Save as\" and setting event\n        menuItem = filemenu.Append(wx.ID_SAVE, \"&Save as\",\n                                   \"Save simulation state to file\")\n        self.Bind(wx.EVT_MENU, self.OnSaveAs, menuItem)\n\n        # Adding \"Exit\" and setting event\n\n        menuItem = filemenu.Append(wx.ID_EXIT, \"&Exit\",\n                                   \"Terminate the program\")\n        self.Bind(wx.EVT_MENU, self.OnExit, menuItem)\n        # filemenu.Append()\n        # filemenu.Append()\n\n        # Implement other wx.Menu instances here\n\n        # Creating the menubar.\n        menuBar = wx.MenuBar()\n        menuBar.Append(filemenu, \"&File\")  # Adding \"filemenu\" to menuBar\n\n        # Add other menus to menubar here\n        # -------------------------------\n\n        # --------------------------------\n\n        # Adding ready menubar to frame\n        self.SetMenuBar(menuBar)  # Adding menuBar to frame\n\n        # Creating ToolBar\n        self.toolbar = self.CreateToolBar()\n        self.toolbar.SetToolBitmapSize((20, 10))  # Button size in pixels?\n        # Creating 'RUN' button to toolbar. Bitmap needs path from main\n        toolItem = self.toolbar.AddLabelTool(self.ID_RUN_BUTTON,\n                                             'Run Simulation',\n                                             wx.Bitmap('GUI/run_button.png'))\n        self.Bind(wx.EVT_MENU, self.OnRun, toolItem)\n\n        # Creating 'Pause' button to toolbar. Bitmap needs path from main\n        toolItem = self.toolbar.AddLabelTool(self.ID_PAUSE_BUTTON,\n                                             'Pause Simulation',\n                                             wx.Bitmap('GUI/pause_button.png'))\n        self.Bind(wx.EVT_MENU, self.OnPause, toolItem)\n\n        self.toolbar.Realize()  # IDIOT U FORGOT TO SHOW IT!!!!!\n\n        # Creating 'Pause' button to toolbar\n\n        # Making frame visible\n        self.Show(True)\n\n    def OnAbout(self, event):\n        \"\"\"Show about dialog box\"\"\"\n        # A message dialog box with an OK button.\n        # wx.OK is a standard ID in wxWidgets.\n        dlg = wx.MessageDialog(self, \"Planet simulator version 1.0\",\n                               \"About Planet simulator\", wx.OK)\n        dlg.ShowModal()  # Show it\n        dlg.Destroy()  # finally destroy it when finished.\n\n    def OnOpen(self, event):\n        \"\"\" Load state from file \"\"\"\n        self.dirname = ''\n\n        dlg = wx.FileDialog(self, \"Choose a file\",\n                            self.dirname, \"\", \"*.*\", wx.OPEN)\n\n        if dlg.ShowModal() == wx.ID_OK:\n            self.filename = dlg.GetFilename()\n            self.dirname = dlg.GetDirectory()\n            f = open(os.path.join(self.dirname, self.filename), 'r')\n\n            # Now we have path to selected file\n            s = Simulation()\n            \n\n\n            f.close()\n        dlg.Destroy()\n\n    def OnSaveAs(self, event):\n        self.dirname = ''\n\n        saveFileDialog = wx.FileDialog(self, \"Save simulation file\",\n                                       self.dirname, \"\", \"*.*\", wx.FD_SAVE |\n                                       wx.FD_OVERWRITE_PROMPT)\n\n        if saveFileDialog.ShowModal() == wx.ID_OK:\n            self.filename = saveFileDialog.GetFilename()\n            self.dirname = saveFileDialog.GetDirectory()\n            f = open(os.path.join(self.dirname, self.filename), 'w')\n\n            # Now we have bath to selected file\n            # simulation.load(f)\n\n            f.close()\n        saveFileDialog.Destroy()\n\n    def OnExit(self, event):\n        self.Close(True)\n\n    def OnRun(self, event):\n        \"\"\"\n        When OnRun called TextEntryDialog will pop up\n        to ask user simulation run parameters\n        @para\n        \"\"\"\n        simulation_speed = 0\n        simulation_timestep = 0\n\n        # Asking simulation speed\n        dlg = wx.TextEntryDialog(None,\n                                 \"Set simulation speed (seconds/real second)\",\n                                 \"Run\")\n        dlg.SetValue(\"100\")\n\n        if dlg.ShowModal() == wx.ID_OK:\n            simulation_speed = dlg.GetValue()\n            if not isinstance(simulation_speed, int):\n                pass\n                # raise WrongSimulationParameterError(\"\")\n\n        # Asking simulation speed\n        dlg2 = wx.TextEntryDialog(None, \"Set timestep (seconds)\", \"Run\")\n        dlg2.SetValue(\"1\")\n\n        if dlg2.ShowModal() == wx.ID_OK:\n            simulation_timestep = dlg2.GetValue()\n            if not isinstance(simulation_timestep, int):\n                pass\n                # raise WrongSimulationParameterError(\"\")\n\n    def OnPause(self, event):\n        pass\n\nif __name__ == '__main__':\n    app = wx.App(False)  # Always needs this\n    w = MainWindow(\"Test Frame\")\n    app.MainLoop()\n",
+			"file": "GUI/mainWindow.py",
+			"file_size": 6116,
+			"file_write_time": 130723076639737566,
+			"settings":
+			{
+				"buffer_size": 5999,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/C/Users/Henri/Desktop/project_backup/Visualization/view.py",
+			"settings":
+			{
+				"buffer_size": 1041,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/C/Users/Henri/Desktop/project_backup/test.py",
+			"settings":
+			{
+				"buffer_size": 155,
+				"line_ending": "Windows"
+			}
+		}
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 588.0,
+		"selected_items":
+		[
+			[
+				"sspy",
+				"Set Syntax: Python"
+			],
+			[
+				"Settings",
+				"Preferences: Package Control Settings – User"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"remove",
+				"Package Control: Remove Package"
+			],
+			[
+				"remo",
+				"Package Control: Remove Package"
+			],
+			[
+				"instal",
+				"Package Control: Install Package"
+			],
+			[
+				"todo",
+				"TodoReview: Project Files"
+			],
+			[
+				"pack",
+				"Package Control: Install Package"
+			],
+			[
+				"ins",
+				"Package Control: Install Package"
+			],
+			[
+				"packa",
+				"Package Control: Install Package"
+			],
+			[
+				"packag",
+				"Package Control: Install Package"
+			],
+			[
+				"package",
+				"Package Control: Remove Package"
+			],
+			[
+				"add fol",
+				"Project: Add Folder"
+			],
+			[
+				"Packa",
+				"Package Control: Install Package"
+			],
+			[
+				"remov",
+				"Package Control: Remove Package"
+			],
+			[
+				"Package r",
+				"Package Control: Remove Package"
+			],
+			[
+				"packa inst",
+				"Package Control: Install Package"
+			],
+			[
+				"spaces",
+				"Indentation: Convert to Spaces"
+			],
+			[
+				"ss la",
+				"Set Syntax: LaTeX"
+			],
+			[
+				"latex",
+				"LaTeXTools: Reconfigure and migrate settings"
+			],
+			[
+				"inst",
+				"Package Control: Install Package"
+			],
+			[
+				"Latex",
+				"LaTeXTools: Reconfigure and migrate settings"
+			],
+			[
+				"ss latex",
+				"Set Syntax: LaTeX"
+			],
+			[
+				"insta",
+				"Package Control: Install Package"
+			],
+			[
+				"ss late",
+				"Set Syntax: LaTeXing"
+			],
+			[
+				"packa in",
+				"Package Control: Install Package"
+			],
+			[
+				"sslat",
+				"Set Syntax: LaTeXing"
+			],
+			[
+				"pac",
+				"Package Control: Install Package"
+			],
+			[
+				"i",
+				"Indentation: Reindent Lines"
+			],
+			[
+				"in",
+				"Indentation: Reindent Lines"
+			],
+			[
+				"inde",
+				"Indentation: Reindent Lines"
+			],
+			[
+				"sspyt",
+				"Set Syntax: Python"
+			],
+			[
+				"Pakc",
+				"Package Control: Add Channel"
+			],
+			[
+				"Remov",
+				"Package Control: Remove Package"
+			],
+			[
+				"Install",
+				"Package Control: Install Package"
+			],
+			[
+				"Pac",
+				"Package Control: Install Package"
+			],
+			[
+				"Pack",
+				"Package Control: Install Package"
+			],
+			[
+				"Packge Con",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 624.0
+	},
+	"console":
+	{
+		"height": 302.0,
+		"history":
+		[
+			"asdf",
+			"\"test_state.txt\"",
+			"test_state.txt",
+			"sumatrapdf",
+			"/clear",
+			"clearall",
+			"clear_all",
+			"clear",
+			"import urllib.request,os,hashlib; h = '2deb499853c4371624f5a07e27c334aa' + 'bf8c4e67d14fb0525ba4f89698a6d7e1'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/C/Users/Henri/Documents/GitHub/Planet_Simulator"
+	],
+	"file_history":
+	[
+		"/C/Users/Henri/Desktop/project_backup/main.py",
+		"/C/Users/Henri/Documents/GitHub/Planet_Simulator/main.py",
+		"/C/Users/Henri/Documents/GitHub/Planet_Simulator/Simulation/simulation.py",
+		"/C/Users/Henri/Documents/GitHub/Planet_Simulator/GUI/runDialog.py",
+		"/C/Users/Henri/Documents/GitHub/Planet_Simulator/README.md",
+		"/C/Users/Henri/Documents/GitHub/Planet_Simulator/GUI/__init__.py",
+		"/C/Users/Henri/AppData/Roaming/Sublime Text 3/Packages/User/Default (Windows).sublime-keymap",
+		"/C/Users/Henri/Documents/GitHub/Planet_Simulator/GUI/mainWindow.py",
+		"/C/Users/Henri/Documents/Koulu/Tietokannat/Harjoitukset/Kierros4/query2.sql",
+		"/C/Users/Henri/AppData/Roaming/Sublime Text 3/Packages/Anaconda/Anaconda.sublime-settings",
+		"/C/Users/Henri/AppData/Roaming/Sublime Text 3/Packages/User/Anaconda.sublime-settings",
+		"/C/Users/Henri/AppData/Roaming/Sublime Text 3/Packages/User/Package Control.sublime-settings",
+		"/C/Users/Henri/AppData/Roaming/Sublime Text 3/Packages/User/Python.sublime-settings",
+		"/C/Users/Henri/AppData/Roaming/Sublime Text 3/Packages/User/Preferences.sublime-settings",
+		"/C/Users/Henri/Documents/GitHub/Planet_Simulator/GUI/mainFrame.py",
+		"/C/Users/Henri/Desktop/project_backup/GUI/mainFrame.py",
+		"/C/Users/Henri/Documents/GitHub/project/Visualization/planetModel.py",
+		"/C/Users/Henri/Documents/GitHub/project/Visualization/starModel.py",
+		"/C/Users/Henri/Documents/GitHub/project/Simulation/Elements/star.py",
+		"/C/Users/Henri/Documents/GitHub/project/project.sublime-project",
+		"/C/Users/Henri/Documents/GitHub/project/Simulation/simulation.py",
+		"/C/Users/Henri/Documents/GitHub/project/Visualization/visualization.py",
+		"/C/Users/Henri/Documents/GitHub/project/Visualization/__init__.py",
+		"/C/Users/Henri/Documents/GitHub/project/Simulation/space.py",
+		"/C/Users/Henri/Documents/GitHub/project/Simulation/Elements/planet.py",
+		"/C/Users/Henri/Documents/GitHub/project/Simulation/physics.py",
+		"/C/Users/Henri/Documents/GitHub/project/Simulation/Elements/element.py",
+		"/C/Users/Henri/Documents/GitHub/project/GUI/mainFrame.py",
+		"/C/Users/Henri/Documents/GitHub/project/test.py",
+		"/C/Users/Henri/Documents/GitHub/project/test_files/earth.txt",
+		"/C/Users/Henri/Documents/GitHub/project/header.h",
+		"/C/Users/Henri/Documents/GitHub/project/header.py",
+		"/C/Users/Henri/Documents/GitHub/project/Simulation/planet.py",
+		"/C/Users/Henri/Documents/GitHub/project/test_simulation.py",
+		"/C/Users/Henri/Documents/GitHub/project/Simulation/satellite.py",
+		"/C/Users/Henri/AppData/Roaming/Sublime Text 3/Packages/TodoReview/TodoReview.sublime-settings",
+		"/C/Users/Henri/Documents/GitHub/project/Project_Plan/overall_plan/toimii.aux",
+		"/C/Users/Henri/Documents/GitHub/project/Project_Plan/technical_plan/simulation_class_diagram.xml",
+		"/C/Users/Henri/Documents/GitHub/project/test_draw.py",
+		"/C/Users/Henri/Documents/GitHub/project/Simulation/element.py",
+		"/C/Users/Henri/Documents/GitHub/project/test_simulation",
+		"/C/Users/Henri/Documents/GitHub/project/Project_Plan/technical_plan/tech_plan.aux",
+		"/C/Users/Henri/Documents/GitHub/project/Project_Plan/overall_plan/toimii.log",
+		"/C/Users/Henri/Documents/GitHub/project/test_physics.py",
+		"/C/Python27/lib/site-packages/visual_common/create_display.py",
+		"/C/Users/Henri/Desktop/p2.py",
+		"/C/Users/Henri/Documents/GitHub/project/Physics/physics.py",
+		"/C/Users/Henri/Documents/GitHub/project/Space/space.py",
+		"/C/Users/Henri/Documents/GitHub/project/Elements/planet.py",
+		"/C/Users/Henri/Documents/GitHub/project/Elements/satellite.py",
+		"/C/Users/Henri/Documents/GitHub/project/GUI/test.py",
+		"/C/Users/Henri/Documents/GitHub/project/Project_Plan/technical_plan/tech_plan.tex",
+		"/C/Python32/Lib/tkinter/test/test_ttk/test_widgets.py",
+		"/C/Users/Henri/Documents/GitHub/project/Elements/element.py",
+		"/C/Users/Henri/Documents/GitHub/project/Project_Plan/project_plan.synctex.gz",
+		"/C/Users/Henri/Documents/GitHub/project/Space/coordinates.py",
+		"/C/Users/Henri/Documents/GitHub/project/README.md",
+		"/C/Users/Henri/Documents/GitHub/project/__init__.py",
+		"/C/Users/Henri/Documents/GitHub/project/Physics/__init__.py",
+		"/C/Users/Henri/Documents/GitHub/project/Space/__init__.py",
+		"/C/Users/Henri/Documents/GitHub/project/Physics/vector.py",
+		"/C/Users/Henri/Documents/GitHub/project/Physics/test_vectors.py",
+		"/C/Users/Henri/Documents/GitHub/project/Project_Plan/project_plan.log",
+		"/C/Users/Henri/Documents/GitHub/project/project_plan.tex",
+		"/C/Users/Henri/Downloads/ELEC-A7200_latex-pohja_2.tex",
+		"/C/cygwin64/home/Henri/Y2/hyphenation/finnish_hyphenation_rule.py",
+		"/C/cygwin64/home/Henri/Y2/hyphenation/test.py",
+		"/C/cygwin64/home/Henri/Y2/hyphenation/vowel_rule.py",
+		"/C/cygwin64/home/Henri/Y2/hyphenation/consonant_rule.py",
+		"/C/cygwin64/home/Henri/Y2/hyphenation/hyphenation_rule.py",
+		"/C/Users/Henri/Documents/GitHub/project/Elements/__init__.py",
+		"/C/cygwin64/home/Henri/Y2/planet_simulator/planet_simulator.sublime-project",
+		"/C/cygwin64/home/Henri/Y2/planet_simulator/vector.py",
+		"/C/cygwin64/home/Henri/Y2/redo_undo/test.py",
+		"/C/cygwin64/home/Henri/Y2/redo_undo/video/__init__.py",
+		"/C/cygwin64/home/Henri/Y2/redo_undo/video/video_section.py",
+		"/C/cygwin64/home/Henri/Y2/redo_undo/video/video_track.py",
+		"/C/cygwin64/home/Henri/Y2/redo_undo/redo_undo.sublime-project",
+		"/C/cygwin64/home/Henri/Y2/planet_simulator/New Text Document.txt",
+		"/C/cygwin64/home/Henri/Y2/redo_undo/doc/delete_time_action.m.html",
+		"/C/cygwin64/home/Henri/Y2/redo_undo/undo/delete_time_action.py",
+		"/C/cygwin64/home/Henri/Y2/redo_undo/__init__.py",
+		"/C/cygwin64/home/Henri/Y2/planet_simulator/planet.py",
+		"/C/cygwin64/home/Henri/Y2/planet_simulator/element.py",
+		"/C/cygwin64/home/Henri/Y2/planet_simulator/Planet.py",
+		"/C/cygwin64/home/Henri/Y2/redo_undo/undo/remove_action.py",
+		"/C/cygwin64/home/Henri/Y2/planet_simulator/planet.sublime-project",
+		"/C/cygwin64/home/Henri/Y2/redo_undo/video/time_code.py",
+		"/C/cygwin64/home/Henri/Y2/redo_undo/undo/add_action.py",
+		"/C/Users/Henri/AppData/Roaming/Sublime Text 3/Packages/User/TodoReview.sublime-settings",
+		"/C/Users/Henri/AppData/Local/Temp/Temp1_undoredo (1).zip/undo/remove_action.py",
+		"/C/cygwin64/home/Henri/Y2/redo_undo/undo/undo_manager.py",
+		"/C/cygwin64/home/Henri/Y2/redo_undo/doc/add_action.m.html",
+		"/C/cygwin64/home/Henri/Y2/redo_undo/doc/remove_action.m.html",
+		"/C/cygwin64/home/Henri/Y2/redo_undo/doc/time_code.m.html",
+		"/C/cygwin64/home/Henri/Y2/redo_undo/doc/undo_manager.m.html",
+		"/C/cygwin64/home/Henri/Y2/redo_undo/doc/video_section.m.html",
+		"/C/cygwin64/home/Henri/Y2/redo_undo/doc/video_track.m.html",
+		"/C/cygwin64/home/Henri/Y2/redo_undo/undo/__init__.py",
+		"/C/Python34/Lib/io.py",
+		"/C/Users/Henri/AppData/Roaming/Sublime Text 3/Packages/Default/Preferences.sublime-settings",
+		"/C/Users/Henri/AppData/Roaming/Sublime Text 3/Packages/SublimePyunit/Default (Windows).sublime-keymap",
+		"/C/Users/Henri/AppData/Roaming/Sublime Text 3/Packages/SublimePyunit/SublimePyunit.sublime-settings",
+		"/C/Users/Henri/AppData/Roaming/Sublime Text 3/Packages/User/SublimePyunit.sublime-settings",
+		"/C/cygwin64/home/Henri/Y2/redo_undo/remove_action.py",
+		"/C/cygwin64/home/Henri/Y2/double_hash/test.py",
+		"/C/cygwin64/home/Henri/Y2/hyphenation/rule_based_hyphenator.py",
+		"/C/cygwin64/home/Henri/Y2/hyphenation/diphthong_rule.py",
+		"/C/cygwin64/home/Henri/Y2/hyphenation/co",
+		"/C/Users/Henri/Documents/Work_applications/CV/cv_7.tex",
+		"/C/Users/Henri/AppData/Roaming/Sublime Text 3/Packages/User/LaTeXTools.sublime-settings",
+		"/C/Users/Henri/Documents/Work_applications/CV/test.tex",
+		"/C/Users/Henri/Documents/Work_applications/CV/cv_3.tex",
+		"/C/Users/Henri/AppData/Roaming/Sublime Text 3/Packages/LaTeXTools/README.markdown",
+		"/C/Users/Henri/AppData/Roaming/Sublime Text 3/Packages/LaTeXing/LaTeXing.sublime-settings",
+		"/C/Users/Henri/AppData/Roaming/Sublime Text 3/Packages/User/LaTeXing.sublime-settings",
+		"/C/Users/Henri/AppData/Roaming/Sublime Text 3/Packages/LaTeXing/LaTeX.sublime-build",
+		"/C/Users/Henri/AppData/Roaming/Sublime Text 3/Packages/SideBarEnhancements/Side Bar.sublime-settings",
+		"/C/Users/Henri/AppData/Roaming/Sublime Text 3/Packages/User/Side Bar.sublime-settings",
+		"/C/cygwin64/home/Henri/Y2/robots/robot.py",
+		"/C/cygwin64/home/Henri/Y2/robots/test.py",
+		"/C/cygwin64/home/Henri/Y2/robots/coordinates.py",
+		"/C/cygwin64/home/Henri/Y2/robots/spinbot.py",
+		"/C/cygwin64/home/Henri/Y2/robots/direction.py",
+		"/C/cygwin64/home/Henri/Y2/robots/square.py",
+		"/C/cygwin64/home/Henri/Y2/robots/nosebot.py",
+		"/C/cygwin64/home/Henri/Y2/robots/robotworld.py",
+		"/C/cygwin64/home/Henri/Y2/robots/lovebot.py"
+	],
+	"find":
+	{
+		"height": 50.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"simulation_speed",
+			"dlg",
+			"dlg2",
+			"completion",
+			"ChangeDepthDialog",
+			"size",
+			"w",
+			"mass",
+			"timestep",
+			"dt",
+			"samp",
+			"space",
+			"Space",
+			"space",
+			"int",
+			"red",
+			"planet",
+			"Elements",
+			"[0]",
+			"Square",
+			"square",
+			"jupiter",
+			"earth",
+			"Earth",
+			"earth",
+			"location",
+			"0",
+			"planet",
+			"x",
+			"�",
+			"velocity_direction",
+			".\n",
+			"self",
+			"list",
+			"173",
+			"starts",
+			"miktex",
+			"latexmk",
+			"path",
+			"previous_hyphen_at",
+			"Lw",
+			"get_location()",
+			"Empty",
+			"find_self",
+			"find_se",
+			"root",
+			"person1",
+			"        \n",
+			"        \n        \n        \n        ",
+			"def",
+			"pass",
+			"\n    def test_get_friend(self):\n    def test_set_friend(self):\n    def test_knows(self):\n    def test_meet(self):\n    def test_get_name(self):",
+			"        \"A\",1\n        \"B\",2\n        \"C\",3\n        \"D\",4\n        \"E\",5\n        \"F\",6\n        \"G\",7",
+			"ä",
+			"ö",
+			"pö",
+			"s",
+			"ö",
+			"insert",
+			"self",
+			"                ",
+			"old_table",
+			"])\n",
+			"sqrtroot",
+			"not_found",
+			"range(10)",
+			"))\n",
+			"range",
+			" =",
+			"next_prime",
+			"prime",
+			")\n",
+			"def",
+			"\nclass Test(unittest.TestCase):\n",
+			"self",
+			"path",
+			"interpreter path",
+			"interpreter route",
+			"interpreter"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 2,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "GUI/mainWindow.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 5999,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								4055,
+								4055
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 2622.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "/C/Users/Henri/Desktop/project_backup/Visualization/view.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1041,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								204,
+								199
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "/C/Users/Henri/Desktop/project_backup/test.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 155,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 31.0
+	},
+	"input":
+	{
+		"height": 43.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 207.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"project": "planet_simulator.sublime-project",
+	"replace":
+	{
+		"height": 58.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+			[
+				"run",
+				"GUI\\runDialog.py"
+			],
+			[
+				"main",
+				"main.py"
+			],
+			[
+				"ma",
+				"GUI\\mainWindow.py"
+			],
+			[
+				"star",
+				"Visualization\\starModel.py"
+			],
+			[
+				"visu",
+				"Visualization\\visualization.py"
+			],
+			[
+				"space",
+				"Simulation\\space.py"
+			],
+			[
+				"simulat",
+				"Simulation\\simulation.py"
+			],
+			[
+				"element",
+				"Simulation\\Elements\\element.py"
+			],
+			[
+				"planet",
+				"Simulation\\Elements\\planet.py"
+			],
+			[
+				"physics",
+				"Simulation\\physics.py"
+			],
+			[
+				"simu",
+				"Simulation\\simulation.py"
+			],
+			[
+				"spac",
+				"Simulation\\space.py"
+			],
+			[
+				"simulation",
+				"test_simulation.py"
+			],
+			[
+				"ple",
+				"Simulation\\planet.py"
+			],
+			[
+				"spa",
+				"Simulation\\space.py"
+			],
+			[
+				"te",
+				"test.py"
+			],
+			[
+				"elmeent",
+				"Simulation\\element.py"
+			],
+			[
+				"plane",
+				"Simulation\\planet.py"
+			],
+			[
+				"simula",
+				"Simulation\\simulation"
+			],
+			[
+				"test",
+				"test.py"
+			],
+			[
+				"",
+				"Simulation\\element.py"
+			],
+			[
+				"pla",
+				"Simulation\\planet.py"
+			],
+			[
+				"sat",
+				"Simulation\\satellite.py"
+			],
+			[
+				"lement",
+				"Simulation\\element.py"
+			],
+			[
+				"phy",
+				"Simulation\\physics.py"
+			],
+			[
+				"physi",
+				"test_physics.py"
+			],
+			[
+				"tes",
+				"test.py"
+			],
+			[
+				"plan",
+				"Elements\\planet.py"
+			],
+			[
+				"test.p",
+				"test.py"
+			],
+			[
+				"drw",
+				"test_draw.py"
+			],
+			[
+				"tet",
+				"test.py"
+			],
+			[
+				"elem",
+				"Elements\\element.py"
+			],
+			[
+				"s",
+				"Elements\\satellite.py"
+			],
+			[
+				"ement",
+				"Elements\\element.py"
+			],
+			[
+				"vector",
+				"Physics\\vector.py"
+			],
+			[
+				"vec",
+				"Physics\\test_vectors.py"
+			],
+			[
+				"sa",
+				"Elements\\satellite.py"
+			],
+			[
+				"remo",
+				"redo_undo\\undo\\remove_action.py"
+			],
+			[
+				"time",
+				"video\\time_code.py"
+			],
+			[
+				"add",
+				"undo\\add_action.py"
+			],
+			[
+				"video",
+				"video\\video_section.py"
+			],
+			[
+				"section",
+				"video\\video_section.py"
+			],
+			[
+				"track",
+				"video\\video_track.py"
+			],
+			[
+				"sect",
+				"video\\video_section.py"
+			],
+			[
+				"delet",
+				"undo\\delete_time_action.py"
+			],
+			[
+				"remove",
+				"undo\\remove_action.py"
+			],
+			[
+				"videon",
+				"video\\video_section.py"
+			],
+			[
+				"action",
+				"undo\\remove_action.py"
+			],
+			[
+				"undo",
+				"undo\\undo_manager.py"
+			],
+			[
+				"remov",
+				"undo\\remove_action.py"
+			],
+			[
+				"add_",
+				"undo\\add_action.py"
+			],
+			[
+				"todo",
+				"TodoReview"
+			],
+			[
+				"secti",
+				"video\\video_section.py"
+			],
+			[
+				"videotrack",
+				"video\\video_track.py"
+			],
+			[
+				"se",
+				"video\\video_section.py"
+			],
+			[
+				"sectio",
+				"video\\video_section.py"
+			],
+			[
+				"sec",
+				"video\\video_section.py"
+			],
+			[
+				"tod",
+				"TodoReview"
+			],
+			[
+				"re",
+				"undo\\remove_action.py"
+			],
+			[
+				"videotr",
+				"video\\video_track.py"
+			],
+			[
+				"videose",
+				"video\\video_section.py"
+			],
+			[
+				"to",
+				"TodoReview"
+			],
+			[
+				"hy",
+				"C:\\cygwin64\\home\\Henri\\Y2\\hyphenation\\diphthong_rule.py"
+			],
+			[
+				"vowel",
+				"C:\\cygwin64\\home\\Henri\\Y2\\hyphenation\\vowel_rule.py"
+			],
+			[
+				"di",
+				"C:\\cygwin64\\home\\Henri\\Y2\\hyphenation\\diphthong_rule.py"
+			],
+			[
+				"con",
+				"C:\\cygwin64\\home\\Henri\\Y2\\hyphenation\\consonant_rule.py"
+			],
+			[
+				"conso",
+				"C:\\cygwin64\\home\\Henri\\Y2\\hyphenation\\consonant_rule.py"
+			],
+			[
+				"fin",
+				"C:\\cygwin64\\home\\Henri\\Y2\\hyphenation\\finnish_hyphenation_rule.py"
+			],
+			[
+				"hyp",
+				"C:\\cygwin64\\home\\Henri\\Y2\\hyphenation\\hyphenation_rule.py"
+			],
+			[
+				"diph",
+				"C:\\cygwin64\\home\\Henri\\Y2\\hyphenation\\diphthong_rule.py"
+			],
+			[
+				"vo",
+				"C:\\cygwin64\\home\\Henri\\Y2\\hyphenation\\vowel_rule.py"
+			],
+			[
+				"finnish",
+				"C:\\cygwin64\\home\\Henri\\Y2\\hyphenation\\finnish_hyphenation_rule.py"
+			],
+			[
+				"ru",
+				"C:\\cygwin64\\home\\Henri\\Y2\\hyphenation\\rule_based_hyphenator.py"
+			],
+			[
+				"y",
+				"C:\\cygwin64\\home\\Henri\\Y2\\hyphenation\\hyphenation_rule.py"
+			],
+			[
+				"drunk",
+				"C:\\cygwin64\\home\\Henri\\Y2\\robots\\drunkbot.py"
+			],
+			[
+				"nose",
+				"C:\\cygwin64\\home\\Henri\\Y2\\robots\\nosebot.py"
+			],
+			[
+				"sqr",
+				"C:\\cygwin64\\home\\Henri\\Y2\\robots\\square.py"
+			],
+			[
+				"dire",
+				"C:\\cygwin64\\home\\Henri\\Y2\\robots\\direction.py"
+			],
+			[
+				"robot",
+				"C:\\cygwin64\\home\\Henri\\Y2\\robots\\robot.py"
+			],
+			[
+				"sq",
+				"C:\\cygwin64\\home\\Henri\\Y2\\robots\\square.py"
+			],
+			[
+				"lovebot",
+				"C:\\cygwin64\\home\\Henri\\Y2\\robots\\lovebot.py"
+			],
+			[
+				"love",
+				"C:\\cygwin64\\home\\Henri\\Y2\\robots\\lovebot.py"
+			],
+			[
+				"world",
+				"C:\\cygwin64\\home\\Henri\\Y2\\robots\\robotworld.py"
+			],
+			[
+				"spin",
+				"C:\\cygwin64\\home\\Henri\\Y2\\robots\\spinbot.py"
+			],
+			[
+				"ro",
+				"C:\\cygwin64\\home\\Henri\\Y2\\robots\\robot.py"
+			],
+			[
+				"coor",
+				"C:\\cygwin64\\home\\Henri\\Y2\\robots\\coordinates.py"
+			],
+			[
+				"dir",
+				"C:\\cygwin64\\home\\Henri\\Y2\\robots\\direction.py"
+			],
+			[
+				"square",
+				"C:\\cygwin64\\home\\Henri\\Y2\\robots\\square.py"
+			],
+			[
+				"squ",
+				"C:\\cygwin64\\home\\Henri\\Y2\\robots\\square.py"
+			],
+			[
+				"squa",
+				"C:\\cygwin64\\home\\Henri\\Y2\\robots\\square.py"
+			],
+			[
+				"squar",
+				"C:\\cygwin64\\home\\Henri\\Y2\\robots\\square.py"
+			],
+			[
+				"dru",
+				"C:\\cygwin64\\home\\Henri\\Y2\\robots\\drunkbot.py"
+			],
+			[
+				"robot_test",
+				"C:\\cygwin64\\home\\Henri\\Y2\\robots\\robot_test.py"
+			],
+			[
+				"lo",
+				"C:\\cygwin64\\home\\Henri\\Y2\\robots\\lovebot.py"
+			],
+			[
+				"direction",
+				"C:\\cygwin64\\home\\Henri\\Y2\\robots\\direction.py"
+			],
+			[
+				"coord",
+				"C:\\cygwin64\\home\\Henri\\Y2\\robots\\coordinates.py"
+			],
+			[
+				"directi",
+				"C:\\cygwin64\\home\\Henri\\Y2\\robots\\direction.py"
+			],
+			[
+				"drun",
+				"C:\\cygwin64\\home\\Henri\\Y2\\robots\\drunkbot.py"
+			],
+			[
+				"direc",
+				"C:\\cygwin64\\home\\Henri\\Y2\\robots\\direction.py"
+			],
+			[
+				"robo",
+				"C:\\cygwin64\\home\\Henri\\Y2\\robots\\robot.py"
+			],
+			[
+				"coordi",
+				"C:\\cygwin64\\home\\Henri\\Y2\\robots\\coordinates.py"
+			],
+			[
+				"rob",
+				"C:\\cygwin64\\home\\Henri\\Y2\\robots\\robot.py"
+			],
+			[
+				"worl",
+				"C:\\cygwin64\\home\\Henri\\Y2\\robots\\robotworld.py"
+			],
+			[
+				"nos",
+				"C:\\cygwin64\\home\\Henri\\Y2\\robots\\nosebot.py"
+			],
+			[
+				"sp",
+				"C:\\cygwin64\\home\\Henri\\Y2\\robots\\spinbot.py"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 535.0,
+		"selected_items":
+		[
+		],
+		"width": 588.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": false,
+	"side_bar_width": 300.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

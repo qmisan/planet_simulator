@@ -1,6 +1,9 @@
 import wx  # wx.Frame etc
 import os  # To get path for "Open file"
 
+from Simulation.simulation import Simulation
+from Visualization.view import View
+
 
 class MainWindow(wx.Frame):
 
@@ -21,7 +24,6 @@ class MainWindow(wx.Frame):
         wx.Frame.__init__(self, parent=None, title=title,
                           size=(local_display_size[0]/2,
                                 0.8*local_display_size[1]), pos=(0, 0))
-
         #  Setting up the menu.
         #  --------------------------------
         filemenu = wx.Menu()
@@ -73,13 +75,14 @@ class MainWindow(wx.Frame):
         self.Bind(wx.EVT_MENU, self.OnRun, toolItem)
 
         # Creating 'Pause' button to toolbar. Bitmap needs path from main
-        toolItem = self.toolbar.AddLabelTool(
-                                             self.ID_PAUSE_BUTTON,
+        toolItem = self.toolbar.AddLabelTool(self.ID_PAUSE_BUTTON,
                                              'Pause Simulation',
                                              wx.Bitmap('GUI/pause_button.png'))
         self.Bind(wx.EVT_MENU, self.OnPause, toolItem)
 
         self.toolbar.Realize()  # IDIOT U FORGOT TO SHOW IT!!!!!
+
+        self.view = View(self)
 
         # Creating 'Pause' button to toolbar
 
@@ -105,12 +108,12 @@ class MainWindow(wx.Frame):
         if dlg.ShowModal() == wx.ID_OK:
             self.filename = dlg.GetFilename()
             self.dirname = dlg.GetDirectory()
-            f = open(os.path.join(self.dirname, self.filename), 'r')
 
-            # Now we have bath to selected file
-            # simulation.load(f)
+            # Now we have path to selected file
+            s = Simulation()
+            s.load(os.path.join(self.dirname, self.filename))
+            s.space.print_elements()
 
-            f.close()
         dlg.Destroy()
 
     def OnSaveAs(self, event):
@@ -135,29 +138,40 @@ class MainWindow(wx.Frame):
         self.Close(True)
 
     def OnRun(self, event):
+        """
+        When OnRun called TextEntryDialog will pop up
+        to ask user simulation run parameters
+        @para
+        """
         simulation_speed = 0
         simulation_timestep = 0
 
         # Asking simulation speed
         dlg = wx.TextEntryDialog(None,
-                                 "Set parameters for simulation",
+                                 "Set simulation speed (seconds/real second)",
                                  "Run")
-        dlg.SetValue("Simulation Speed")
+        dlg.SetValue("100")
 
         if dlg.ShowModal() == wx.ID_OK:
             simulation_speed = dlg.GetValue()
+            if not isinstance(simulation_speed, int):
+                pass
+                # raise WrongSimulationParameterError("")
 
-        # Asking timestep
-        dlg2 = wx.TextEntryDialog(None,
-                                  "Still need timestep",
-                                  "Run")
-        dlg2.SetValue("Simulation Timestep")
+        # Asking simulation speed
+        dlg2 = wx.TextEntryDialog(None, "Set timestep (seconds)", "Run")
+        dlg2.SetValue("1")
 
-        if dlg2.ShowModal == wx.ID_OK:
+        if dlg2.ShowModal() == wx.ID_OK:
             simulation_timestep = dlg2.GetValue()
-            dlg2.Destroy()
-        print("Speed:" + str(simulation_speed) + "\nStep:"
-              + str(simulation_timestep))
+            if not isinstance(simulation_timestep, int):
+                pass
+                # raise WrongSimulationParameterError("")
+        view = View(self)
+        # try:
+        #     # simulation.run(simulation_timestep)
+        # except:
+        #     pass
 
     def OnPause(self, event):
         pass

@@ -1,0 +1,2 @@
+Planet Earth 0,0,0 0,0,0 5.97219e24 blue
+#Planet Moon 0,5,0 5,0,5 
