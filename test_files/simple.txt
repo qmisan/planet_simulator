@@ -1,0 +1,2 @@
+Planet Earth 5,0,0 0,1,0 1e9 blue
+Star Sun 0,0,0 0,0,0 1e10 yellow

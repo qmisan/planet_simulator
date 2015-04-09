@@ -58,6 +58,7 @@ class Simulation(object):
         print("Loaded following elements to simulation state:")
         self.space.print_elements()
         f.close()
+        self.make_visuals()
 
     def save(self, file):  # TODO: Saving state into file
         """
@@ -75,31 +76,57 @@ class Simulation(object):
                     str(element.velocity.x)+","+str(element.velocity.y)+","
                     + str(element.velocity.y)+" "+str(element.mass) + " " +
                     element.get_color() + "\n")
-        # TODO: Color type? How to make string?
         f.close()
 
-    def run(self, samp, timestep):
+    def run(self, speed, timestep, frequency):
         """
         Runs simulation forward from current state with current parameters
-        @param samp: how many times per second this is updated
+        @param speed: How many times physics calculated per second
+        @param timestep: How much time elapses between calculations
+        @param frequency: How many many times visual models updated per speed 
         (seconds/real second)
         """
-
+        i = 0
         while(True):
-            rate(samp)
-            self.space.calculate_physics(self.timestep)
+            rate(speed)
+            self.space.calculate_physics(timestep)
             self.space.update_physics()
-            print(str(self.space.element_list[0]))
+            i += 1
+            # print(str(self.space.element_list[0]))
+            if i == frequency:
+                self.render()
+                i = 0
 
     def add(self, element):
         self.space.add_element(element)
 
-    def render(self):
+    def make_visuals(self):
         """
-        TODO: Can I move this to some kind of
-        Visualization Right now in simulation or space?
+        Makes visual model for each element in space
         """
         for element in self.space.element_list:
-            element.visualization.pos = element.position
-            element.visualization.label.pos = element.visualization.pos
-            element.visualization.label.text = str(element)
+            element.visual = sphere(pos=element.position, color=element.color,
+                                    make_trail=True, radius = 1)
+            element.visual.label = label(pos=element.visual.pos,
+                                         text=str(element), xoffset=20,
+                                         yoffset=12,
+                                         space=element.visual.radius,
+                                         height=10, border=6,
+                                         font='sans')
+
+            if element.type == "Planet":
+                pass
+
+            # Stars have unique ability: Emitting light
+            if element.type == "Star":
+                element.visual.material = materials.shiny
+
+    def render(self):
+        """
+        Renders space for every frame and updates visual model position
+        to it's paraller in physics engine
+        """
+        for element in self.space.element_list:
+            element.visual.pos = element.position
+            element.visual.label.pos = element.visual.pos
+            element.visual.label.text = str(element)

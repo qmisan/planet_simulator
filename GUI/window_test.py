@@ -10,14 +10,16 @@ class Window(window):
                               0.8*local_display_size[1]),
                         _make_panel=False)
         self.win.Centre()
-        panel = wx.Panel(self.win,-1)
+        panel = wx.Panel(self.win, -1)
+        scene = display(window = panel)
+        
         panel.SetBackgroundColour("YELLOW")
 
-        panel2 = wx.Panel(self.win,-1)
+        panel2 = wx.Panel(self.win, -1)
         panel2.SetBackgroundColour("BLUE")
         sizer = wx.BoxSizer(wx.HORIZONTAL)
-        sizer.Add(panel,1,wx.EXPAND)
-        sizer.Add(panel2,1,wx.EXPAND)
+        sizer.Add(panel, 1, wx.EXPAND)
+        sizer.Add(panel2, 1, wx.EXPAND)
 
         sizer.Add((-1,500))
         self.win.SetSizer(sizer)
