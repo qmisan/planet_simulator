@@ -1,16 +1,22 @@
 import wx  # wx.Frame etc
 import os  # To get path for "Open file"
+from visual import *
+from toolbarPanel import ToolbarPanel
+# from Simulation.simulation import Simulation
+# from Visualization.view import View
 
-from Simulation.simulation import Simulation
-from Visualization.view import View
 
-
-class MainWindow(wx.Frame):
-
+class MainWindow(window):
+    """
+    This class is baseclass for MainWindow. MainWindow panels
+    are implemented in their own classes. MainWindow implements
+    filemenu and its functionality and sizers for different
+    """
     # ID LIST FOR BUTTONS
     ID_RUN_BUTTON = wx.NewId()
     ID_PAUSE_BUTTON = wx.NewId()
     ID_TOOLBAR = wx.NewId()
+    simulation = None
 
     def __init__(self, title):
 
@@ -21,35 +27,34 @@ class MainWindow(wx.Frame):
 
         #  Initialize mainwindow with size 0.5 * width
         #  and full height of local display
-        wx.Frame.__init__(self, parent=None, title=title,
-                          size=(local_display_size[0]/2,
-                                0.8*local_display_size[1]), pos=(0, 0))
-        #  Setting up the menu.
-        #  --------------------------------
-        filemenu = wx.Menu()
+        window.__init__(self, parent=None, title=title,
+                        size=(local_display_size[0]/2,
+                              0.8*local_display_size[1]),
+                        _make_panel=False)
 
+        self.SetMenubar()
+        self.SetToolbar()
+
+        self.win.Centre()
+
+    def SetMenubar(self):
+        filemenu = wx.Menu()
         # Adding "About" menuItem and setting event
         menuItem = filemenu.Append(wx.ID_ABOUT, "&About",
                                    "Information about this program")
-        self.Bind(wx.EVT_MENU, self.OnAbout, menuItem)
-
+        self.win.Bind(wx.EVT_MENU, self.OnAbout, menuItem)
         # Adding "Open" and setting event
         menuItem = filemenu.Append(wx.ID_OPEN, "&Open",
                                    "Open simulation state from file")
-        self.Bind(wx.EVT_MENU, self.OnOpen, menuItem)
-
+        self.win.Bind(wx.EVT_MENU, self.OnOpen, menuItem)
         # Adding "Save as" and setting event
         menuItem = filemenu.Append(wx.ID_SAVE, "&Save as",
                                    "Save simulation state to file")
-        self.Bind(wx.EVT_MENU, self.OnSaveAs, menuItem)
-
+        self.win.Bind(wx.EVT_MENU, self.OnSaveAs, menuItem)
         # Adding "Exit" and setting event
-
         menuItem = filemenu.Append(wx.ID_EXIT, "&Exit",
                                    "Terminate the program")
-        self.Bind(wx.EVT_MENU, self.OnExit, menuItem)
-        # filemenu.Append()
-        # filemenu.Append()
+        self.win.Bind(wx.EVT_MENU, self.OnExit, menuItem)
 
         # Implement other wx.Menu instances here
 
@@ -61,39 +66,34 @@ class MainWindow(wx.Frame):
         # -------------------------------
 
         # --------------------------------
-
         # Adding ready menubar to frame
-        self.SetMenuBar(menuBar)  # Adding menuBar to frame
+        self.win.SetMenuBar(menuBar)  # Adding menuBar to frame
 
-        # Creating ToolBar
-        self.toolbar = self.CreateToolBar()
+    def SetToolbar(self):
+
+        # Init toolbar
+        self.toolbar = self.win.CreateToolBar()
         self.toolbar.SetToolBitmapSize((20, 10))  # Button size in pixels?
-        # Creating 'RUN' button to toolbar. Bitmap needs path from main
-        toolItem = self.toolbar.AddLabelTool(self.ID_RUN_BUTTON,
-                                             'Run Simulation',
-                                             wx.Bitmap('GUI/run_button.png'))
-        self.Bind(wx.EVT_MENU, self.OnRun, toolItem)
-
-        # Creating 'Pause' button to toolbar. Bitmap needs path from main
-        toolItem = self.toolbar.AddLabelTool(self.ID_PAUSE_BUTTON,
-                                             'Pause Simulation',
-                                             wx.Bitmap('GUI/pause_button.png'))
-        self.Bind(wx.EVT_MENU, self.OnPause, toolItem)
+        # Creating 'RUN' button to toolbar
+        runTool = self.toolbar.AddLabelTool(wx.EVT_BUTTON, 'Run Simulation',
+                                            wx.Bitmap('run_button.png'))
+        self.win.Bind(ID_RUN_BUTTON, self.onRun, runTool)
+        # Creating 'Pause' button to toolbar
+        pauseTool = self.toolbar.AddLabelTool(wx.EVT_BUTTON,
+                                              'Pause Simulation',
+                                              wx.Bitmap('pause_button.png'))
+        self.win.Bind(ID_PAUSE_BUTTON, self.on, pauseTool)
 
         self.toolbar.Realize()  # IDIOT U FORGOT TO SHOW IT!!!!!
 
-        self.view = View(self)
-
-        # Creating 'Pause' button to toolbar
-
-        # Making frame visible
-        self.Show(True)
+    def SetStatusbar(self):
+        pass
 
     def OnAbout(self, event):
         """Show about dialog box"""
         # A message dialog box with an OK button.
         # wx.OK is a standard ID in wxWidgets.
-        dlg = wx.MessageDialog(self, "Planet simulator version 1.0",
+        dlg = wx.MessageDialog(self.win, "Planet simulator version 1.0",
                                "About Planet simulator", wx.OK)
         dlg.ShowModal()  # Show it
         dlg.Destroy()  # finally destroy it when finished.
@@ -102,7 +102,7 @@ class MainWindow(wx.Frame):
         """ Load state from file """
         self.dirname = ''
 
-        dlg = wx.FileDialog(self, "Choose a file",
+        dlg = wx.FileDialog(self.win, "Choose a file",
                             self.dirname, "", "*.*", wx.OPEN)
 
         if dlg.ShowModal() == wx.ID_OK:
@@ -110,16 +110,17 @@ class MainWindow(wx.Frame):
             self.dirname = dlg.GetDirectory()
 
             # Now we have path to selected file
-            s = Simulation()
-            s.load(os.path.join(self.dirname, self.filename))
-            s.space.print_elements()
+            self.simulation = Simulation()
+            self.simulation.load(os.path.join(self.dirname, self.filename))
+            self.simulation.space.print_elements()
+            self.simulation.render()
 
         dlg.Destroy()
 
     def OnSaveAs(self, event):
         self.dirname = ''
 
-        saveFileDialog = wx.FileDialog(self, "Save simulation file",
+        saveFileDialog = wx.FileDialog(self.win, "Save simulation file",
                                        self.dirname, "", "*.*", wx.FD_SAVE |
                                        wx.FD_OVERWRITE_PROMPT)
 
@@ -135,7 +136,14 @@ class MainWindow(wx.Frame):
         saveFileDialog.Destroy()
 
     def OnExit(self, event):
-        self.Close(True)
+        dlg = wx.MessageDialog(self.win,
+                               "Do you really want to close this application?",
+                               "Confirm Exit",
+                               wx.OK | wx.CANCEL | wx.ICON_QUESTION)
+        result = dlg.ShowModal()
+        dlg.Destroy()
+        if result == wx.ID_OK:
+            exit()
 
     def OnRun(self, event):
         """
@@ -167,7 +175,6 @@ class MainWindow(wx.Frame):
             if not isinstance(simulation_timestep, int):
                 pass
                 # raise WrongSimulationParameterError("")
-        view = View(self)
         # try:
         #     # simulation.run(simulation_timestep)
         # except:

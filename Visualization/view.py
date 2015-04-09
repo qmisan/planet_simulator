@@ -5,30 +5,14 @@ from visual import *
 # from Visualization.starModel import StarModel
 
 
-class View(object):
+class View(wx.Frame):
+    title = "3D-canvas"
+
     def __init__(self, parentWindow):
-        self.scene = display(window=parentWindow, x=0, y=0,
-                             width=parentWindow.dwidth,
-                             height=parentWindow.dheight,
-                             forward=-vector(0, 1, 2))
+        print("GOT:{}\nAND:{}".format(parentWindow.width,parentWindow.height))
 
-        print("Been there done that")
-        self.scene = display
-
-        # Scale factors (NOTE: DO I Need these?)
-        # scale_dist = simulation.space.get_longest_distance()
-        # scale_mass = simulation.space.get_smallest().mass
+        display(window=parentWindow, width=parentWindow.width*0.8, 
+                height=parentWindow.height*0.8)
         sphere()
-
-        # model_list = []
-        # for element in simulation.space.element_list:
-        #     if element.type == "Star":
-        #         new = StarModel((element.position), element.mass/scale_mass,
-        #                         str(element))
-        #     else:
-        #         new = PlanetModel(element.position/scale_dist,
-        #                           element.mass/scale_mass, str(element))
-        #     model_list.append(new)
-
 if __name__ == "__main__":
     pass
