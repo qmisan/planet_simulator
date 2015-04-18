@@ -128,10 +128,20 @@ class Simulation(object):
         while(1):
             # NOTE: Test print
             rate(speed)
+            # NOTE: Test print
+
             print("I go here too inside the loop")
+            # TODO: running simulation doesn't go inside space.calculate_physics
             self.space.calculate_physics(timestep)
+            # NOTE: Test print
+            print("I calculate physics")
             self.space.update_physics()
-            i += 1
+
+            # NOTE: Test print
+            print("I update physics")
+
+            self.render()
+            i = i + 1
             # print(str(self.space.element_list[0]))
             # NOTE: Test print
             print("I even go here but i no rly care :DDD")

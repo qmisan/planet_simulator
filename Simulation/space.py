@@ -15,7 +15,8 @@ class Space(object):
     def calculate_physics(self, time):
         for element in self.element_list:
             element.calculate_next(time)
-
+        # NOTE: Test print
+        print("Im here")
     def update_physics(self):
         for element in self.element_list:
             element.update()
