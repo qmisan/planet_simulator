@@ -8,7 +8,8 @@ class Element(object):
     Element can be red, blue, yellow, cyan, white, orange or magenta
     """
 
-    # Possible element colors NOTE: Can be RGB too but needs structure changing
+    # Possible element colors 
+    # NOTE: Can be RGB too but needs structure changing
     colors = {"red": color.red, "blue": color.blue,
               "cyan": color.cyan, "yellow": color.yellow,
               "white": color.white, "orange": color.orange,

@@ -2,5 +2,7 @@
 # When sun is modelled to simulation spaces origon (0,0,0)
 # Tyyppi label position(muodossa: x,y,z) velocity(x,y,z) mass color
 Planet Sun 0,0,0 0,0,0 1.98855e30 yellow
-#Planet Earth 0,147095000,0 29780,0,0 5.97219e24 blue
-Planet Earth 0,1,0 29780,0,0 5.97219e24 blue
+#
+#Planet Earth 0,1,0 29780,0,0 5.97219e24 blue
+#
+Planet Mars 0,147095000,0 29780,0,0 5.97219e24 blue

@@ -14,7 +14,7 @@ class Simulation(object):
     def __init__(self):
         self.space = Space()
 
-    def load(self, file):  # TODO: Parsing state from file
+    def load(self, file):  # NOTE: DONE Parsing state from file
         """
         Parses simulation state out of file
         """
@@ -54,13 +54,14 @@ class Simulation(object):
                                            velocity, mass, self.space)
                         self.add(new_element)
 
-                    # TODO: Other types here
+                    # NOTE: Other types here
         print("Loaded following elements to simulation state:")
         self.space.print_elements()
         f.close()
         self.make_visuals()
+        self.render()
 
-    def save(self, file):  # TODO: Saving state into file
+    def save(self, file):  # NOTE: DONE Saving state into file
         """
         Saves current state in a file
         """
@@ -78,24 +79,7 @@ class Simulation(object):
                     element.get_color() + "\n")
         f.close()
 
-    def run(self, speed, timestep, frequency):
-        """
-        Runs simulation forward from current state with current parameters
-        @param speed: How many times physics calculated per second
-        @param timestep: How much time elapses between calculations
-        @param frequency: How many many times visual models updated per speed
-        (seconds/real second)
-        """
-        i = 0
-        while(True):
-            rate(speed)
-            self.space.calculate_physics(timestep)
-            self.space.update_physics()
-            i += 1
-            # print(str(self.space.element_list[0]))
-            if i == frequency:
-                self.render()
-                i = 0
+
 
     def add(self, element):
         self.space.add_element(element)
@@ -105,7 +89,7 @@ class Simulation(object):
         Makes visual model for each element in space
         """
         for element in self.space.element_list:
-            element.visual = sphere(pos=element.position, color=element.color,
+            element.visual = sphere(pos=element.position,
                                     make_trail=True, radius=1)
             element.visual.label = label(pos=element.visual.pos,
                                          text=str(element), xoffset=20,
@@ -114,12 +98,46 @@ class Simulation(object):
                                          height=10, border=6,
                                          font='sans')
 
-            if element.label == "Earth":
-                element.visual.materil = materials.Earth
+            if element.type == "Planet":
+                # Earth has unique texture material
+                # Other than that its similar to planet objects
+                if element.label == "Earth":
+                    element.visual.material = materials.earth
+                else:
+                    element.visual.color = element.color
 
             # Stars have unique ability: Emitting light
+            # In addition they have increased radius compared to other objects
             if element.type == "Star":
+                element.visual.color = element.color
                 element.visual.material = materials.emissive
+                element.visual.radius = 2
+
+    def run(self, speed, timestep, frequency):
+        """
+        Runs simulation forward from current state with current parameters
+        @param speed: How many times physics calculated per second
+        @param timestep: How much time elapses between calculations
+        @param frequency: How many many times visual models updated per speed
+        (seconds/real second)
+        """
+        i = 0
+        # NOTE: Test print
+        print("I TRY TO OPEN THIS LOL")
+        print("Speed:{}\nTimestep:{}\nFrequency:{}\n".format(speed,timestep,frequency))
+        while(1):
+            # NOTE: Test print
+            rate(speed)
+            print("I go here too inside the loop")
+            self.space.calculate_physics(timestep)
+            self.space.update_physics()
+            i += 1
+            # print(str(self.space.element_list[0]))
+            # NOTE: Test print
+            print("I even go here but i no rly care :DDD")
+            if i == frequency:
+                self.render()
+                i = 0
 
     def render(self):
         """
@@ -130,3 +148,4 @@ class Simulation(object):
             element.visual.pos = element.position
             element.visual.label.pos = element.visual.pos
             element.visual.label.text = str(element)
+

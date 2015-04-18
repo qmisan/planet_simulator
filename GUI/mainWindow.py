@@ -2,6 +2,7 @@ import wx  # wx.Frame etc
 import os  # To get path for "Open file"
 from visual import *
 from toolbarPanel import ToolbarPanel
+from Simulation.simulation import Simulation
 # from Simulation.simulation import Simulation
 # from Visualization.view import View
 
@@ -72,19 +73,22 @@ class MainWindow(window):
     def SetToolbar(self):
 
         # Init toolbar
-        self.toolbar = self.win.CreateToolBar()
-        self.toolbar.SetToolBitmapSize((20, 10))  # Button size in pixels?
+        toolbar = self.win.CreateToolBar()
+        toolbar.SetToolBitmapSize((20, 10))  # Button size in pixels?
+        # qtool = toolbar.AddLabelTool(wx.ID_ANY,'Quit',wx.Bitmap('run_button.png'))
         # Creating 'RUN' button to toolbar
-        runTool = self.toolbar.AddLabelTool(wx.EVT_BUTTON, 'Run Simulation',
-                                            wx.Bitmap('run_button.png'))
-        self.win.Bind(ID_RUN_BUTTON, self.onRun, runTool)
+        runTool = toolbar.AddLabelTool(wx.ID_ANY,
+                                       'Run Simulation',
+                                       wx.Bitmap('GUI/run_button.png'))
+        self.win.Bind(wx.EVT_TOOL, self.OnRun, runTool)
+ 
         # Creating 'Pause' button to toolbar
-        pauseTool = self.toolbar.AddLabelTool(wx.EVT_BUTTON,
+        pauseTool = toolbar.AddLabelTool(wx.ID_ANY,
                                               'Pause Simulation',
-                                              wx.Bitmap('pause_button.png'))
-        self.win.Bind(ID_PAUSE_BUTTON, self.on, pauseTool)
+                                              wx.Bitmap('GUI/pause_button.png'))
+        self.win.Bind(wx.EVT_TOOL, self.OnPause, pauseTool)
 
-        self.toolbar.Realize()  # IDIOT U FORGOT TO SHOW IT!!!!!
+        toolbar.Realize()  # IDIOT U FORGOT TO SHOW IT!!!!!
 
     def SetStatusbar(self):
         pass
@@ -100,6 +104,9 @@ class MainWindow(window):
 
     def OnOpen(self, event):
         """ Load state from file """
+        # TODO: If simulation already loaded ask if want open new one without saving dialog
+        # if not self.simulation == None:
+
         self.dirname = ''
 
         dlg = wx.FileDialog(self.win, "Choose a file",
@@ -113,11 +120,28 @@ class MainWindow(window):
             self.simulation = Simulation()
             self.simulation.load(os.path.join(self.dirname, self.filename))
             self.simulation.space.print_elements()
-            self.simulation.render()
+
+            # Makes display for visualization
+            # TODO: Need to dock display to mainWindow
+            # self.SetDisplay()
+
+            # Make visuals to all elements and add them rendering space
+            # self.simulation.make_visuals()
+            # self.simulation.render()
+            # rate = 
 
         dlg.Destroy()
+        while(1):
+            rate(100)
 
     def OnSaveAs(self, event):
+
+        # TODO: DialogBox to ask if user wants to save already saved material
+        # MessageBox telling that state has already been saved
+        # Asks if user wants to save to different location
+        # if self.isSaved == True:
+        #     pass
+
         self.dirname = ''
 
         saveFileDialog = wx.FileDialog(self.win, "Save simulation file",
@@ -154,6 +178,15 @@ class MainWindow(window):
         simulation_speed = 0
         simulation_timestep = 0
 
+        if self.simulation == None:
+            dlg5 = wx.MessageDialog(self.win,
+                                   "No loaded simulation state present!",
+                                    "Error running simulation!",
+                                    wx.OK)
+            dlg5.ShowModal()
+            dlg5.Destroy()
+            return
+
         # Asking simulation speed
         dlg = wx.TextEntryDialog(None,
                                  "Set simulation speed (seconds/real second)",
@@ -168,19 +201,36 @@ class MainWindow(window):
 
         # Asking simulation speed
         dlg2 = wx.TextEntryDialog(None, "Set timestep (seconds)", "Run")
-        dlg2.SetValue("1")
+        dlg2.SetValue("0.1")
 
         if dlg2.ShowModal() == wx.ID_OK:
             simulation_timestep = dlg2.GetValue()
             if not isinstance(simulation_timestep, int):
                 pass
                 # raise WrongSimulationParameterError("")
-        # try:
-        #     # simulation.run(simulation_timestep)
-        # except:
-        #     pass
+
+        # Asking rendering frequency
+        dlg3 = wx.TextEntryDialog(None, "Set rendering frequency", "Run")
+        dlg3.SetValue("2")
+
+        if dlg3.ShowModal() == wx.ID_OK:
+            frequency = dlg3.GetValue()
+            if not isinstance(frequency, int):
+                pass
+                # raise WrongSimulationParameterError("")
+
+        try:
+            # NOTE: Test print
+            print("Im here and i really wanna to tis :DD")
+            self.simulation.run(simulation_speed, simulation_timestep, frequency)
+        except:
+             pass
 
     def OnPause(self, event):
+        while(1):
+            rate(0)
+
+    def SetDisplay(self):
         pass
 
 if __name__ == '__main__':
