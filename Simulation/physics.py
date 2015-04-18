@@ -6,7 +6,7 @@ This file will include the physics equations I will use for this project
 
 def gravity(element1, element2):
     """
-    Returns force vector (so that it has direction) 
+    Returns force vector (so that it has direction)
     so it must be scalar
     times unit vector from element1.location to element2.location
     """
@@ -23,7 +23,7 @@ def acceleration(force, mass):
     return (force*(1/mass))
 
 
-def distance(loc1, loc2):  # Locations vectorvalues
+def distance(loc1, loc2):
     return mag(loc1-loc2)
 
 
@@ -32,4 +32,3 @@ def unit_vector(vector):
     Makes unit vector with same direction as param
     """
     return vector/mag(vector)
-

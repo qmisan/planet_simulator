@@ -23,12 +23,13 @@ class Element(object):
         """
         for element in self.space.element_list:
             if element.position != self.position:
-                self.acceleration = self.acceleration
-                + acceleration(gravity(self, element), self.mass)
+                
+                self.acceleration = acceleration(gravity(self, element), self.mass)
 
         self.next_pos = (self.position + self.velocity *
-                         dt + 0.5 * self.acceleration*(dt**2))  # New pos
+                         dt + 0.5 * self.acceleration * (dt**2))  # New pos
 
+        print(self.next_pos)
         self.next_vel += self.acceleration*dt  # New velocity
 
     def update(self):

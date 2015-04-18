@@ -10,7 +10,7 @@ class Planet(Element):
 
         self.color = color
         self.type = "Planet"  # Made always for this type, used in element str
-        self.visualization = None
+        self.visual = None
         self.label = label
         self.position = position  # Vector value from origon
         self.velocity = velocity  # Vector value

@@ -83,7 +83,7 @@ class Simulation(object):
         Runs simulation forward from current state with current parameters
         @param speed: How many times physics calculated per second
         @param timestep: How much time elapses between calculations
-        @param frequency: How many many times visual models updated per speed 
+        @param frequency: How many many times visual models updated per speed
         (seconds/real second)
         """
         i = 0
@@ -106,7 +106,7 @@ class Simulation(object):
         """
         for element in self.space.element_list:
             element.visual = sphere(pos=element.position, color=element.color,
-                                    make_trail=True, radius = 1)
+                                    make_trail=True, radius=1)
             element.visual.label = label(pos=element.visual.pos,
                                          text=str(element), xoffset=20,
                                          yoffset=12,
@@ -114,12 +114,12 @@ class Simulation(object):
                                          height=10, border=6,
                                          font='sans')
 
-            if element.type == "Planet":
-                pass
+            if element.label == "Earth":
+                element.visual.materil = materials.Earth
 
             # Stars have unique ability: Emitting light
             if element.type == "Star":
-                element.visual.material = materials.shiny
+                element.visual.material = materials.emissive
 
     def render(self):
         """

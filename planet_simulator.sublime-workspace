@@ -4,6 +4,22 @@
 		"selected_items":
 		[
 			[
+				"main",
+				"mainWindow"
+			],
+			[
+				"ea",
+				"Earth"
+			],
+			[
+				"next",
+				"next_pos	statement"
+			],
+			[
+				"hei",
+				"heigth"
+			],
+			[
 				"pause",
 				"pauseTool"
 			],
@@ -94,10 +110,6 @@
 			[
 				"if",
 				"ifmain	if __name__ == '__main__'"
-			],
-			[
-				"next",
-				"next_vel〔variable〕"
 			],
 			[
 				"acceleration",
@@ -304,10 +316,10 @@
 	"buffers":
 	[
 		{
-			"file": "GUI/mainWindow.py",
+			"file": "main.py",
 			"settings":
 			{
-				"buffer_size": 6690,
+				"buffer_size": 699,
 				"line_ending": "Windows"
 			}
 		},
@@ -315,23 +327,15 @@
 			"file": "Simulation/simulation.py",
 			"settings":
 			{
-				"buffer_size": 4362,
+				"buffer_size": 5418,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "GUI/window_test.py",
+			"file": "GUI/mainWindow.py",
 			"settings":
 			{
-				"buffer_size": 820,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "main.py",
-			"settings":
-			{
-				"buffer_size": 272,
+				"buffer_size": 6690,
 				"line_ending": "Windows"
 			}
 		}
@@ -339,9 +343,13 @@
 	"build_system": "",
 	"command_palette":
 	{
-		"height": 375.0,
+		"height": 279.0,
 		"selected_items":
 		[
+			[
+				"todo",
+				"TodoReview: Project Files"
+			],
 			[
 				"toggle",
 				"View: Toggle Menu"
@@ -349,10 +357,6 @@
 			[
 				"sspy",
 				"Set Syntax: Python"
-			],
-			[
-				"todo",
-				"TodoReview: Project Files"
 			],
 			[
 				"Settings",
@@ -532,19 +536,25 @@
 	],
 	"file_history":
 	[
-		"/C/Users/Henri/Desktop/project_backup/GUI/mainFrame.py",
+		"/C/Users/Henri/Documents/GitHub/Planet_Simulator/GUI/window_test.py",
+		"/C/Users/Henri/Documents/GitHub/Planet_Simulator/Simulation/physics.py",
 		"/C/Users/Henri/Documents/GitHub/Planet_Simulator/GUI/boxer_test.py",
-		"/C/Users/Henri/Documents/GitHub/Planet_Simulator/GUI/toolbarPanel.py",
+		"/C/Users/Henri/Documents/GitHub/Planet_Simulator/GUI/mainWindow.py",
+		"/C/Users/Henri/Documents/GitHub/Planet_Simulator/Simulation/space.py",
+		"/C/Users/Henri/Documents/GitHub/Planet_Simulator/Simulation/Elements/element.py",
+		"/C/Users/Henri/Documents/GitHub/Planet_Simulator/Simulation/simulation.py",
 		"/C/Users/Henri/Documents/GitHub/Planet_Simulator/GUI/test_frame",
+		"/C/Users/Henri/Documents/GitHub/Planet_Simulator/test_files/test_load.txt",
+		"/C/Users/Henri/Documents/GitHub/Planet_Simulator/main.py",
+		"/C/Users/Henri/Documents/GitHub/Planet_Simulator/Simulation/Elements/planet.py",
+		"/C/Users/Henri/Documents/GitHub/Planet_Simulator/Simulation/Elements/star.py",
+		"/C/Users/Henri/Desktop/project_backup/GUI/mainFrame.py",
+		"/C/Users/Henri/Documents/GitHub/Planet_Simulator/GUI/toolbarPanel.py",
 		"/C/Users/Henri/Documents/GitHub/Planet_Simulator/GUI/viewPanel.py",
 		"/C/Users/Henri/Documents/GitHub/Planet_Simulator/GUI/dataPanel.py",
-		"/C/Users/Henri/Documents/GitHub/Planet_Simulator/GUI/mainWindow.py",
 		"/C/Users/Henri/Documents/GitHub/Planet_Simulator/GUI/__init__.py",
 		"/C/Users/Henri/Documents/GitHub/Planet_Simulator/Visualization/view.py",
-		"/C/Users/Henri/Documents/GitHub/Planet_Simulator/main.py",
 		"/C/Python27/lib/site-packages/visual_common/create_display.py",
-		"/C/Users/Henri/Documents/GitHub/Planet_Simulator/Simulation/simulation.py",
-		"/C/Users/Henri/Documents/GitHub/Planet_Simulator/Simulation/space.py",
 		"/C/Users/Henri/Desktop/project_backup/Visualization/view.py",
 		"/C/Users/Henri/Documents/GitHub/Planet_Simulator/Visualization/__init__.py",
 		"/C/Users/Henri/Desktop/project_backup/test.py",
@@ -653,13 +663,7 @@
 		"/C/cygwin64/home/Henri/Y2/hyphenation/co",
 		"/C/Users/Henri/Documents/Work_applications/CV/cv_7.tex",
 		"/C/Users/Henri/AppData/Roaming/Sublime Text 3/Packages/User/LaTeXTools.sublime-settings",
-		"/C/Users/Henri/Documents/Work_applications/CV/test.tex",
-		"/C/Users/Henri/Documents/Work_applications/CV/cv_3.tex",
-		"/C/Users/Henri/AppData/Roaming/Sublime Text 3/Packages/LaTeXTools/README.markdown",
-		"/C/Users/Henri/AppData/Roaming/Sublime Text 3/Packages/LaTeXing/LaTeXing.sublime-settings",
-		"/C/Users/Henri/AppData/Roaming/Sublime Text 3/Packages/User/LaTeXing.sublime-settings",
-		"/C/Users/Henri/AppData/Roaming/Sublime Text 3/Packages/LaTeXing/LaTeX.sublime-build",
-		"/C/Users/Henri/AppData/Roaming/Sublime Text 3/Packages/SideBarEnhancements/Side Bar.sublime-settings"
+		"/C/Users/Henri/Documents/Work_applications/CV/test.tex"
 	],
 	"find":
 	{
@@ -677,6 +681,12 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"[0]",
+			"acceleration",
+			"[0",
+			"[0]",
+			"self.next_pos",
+			"0",
 			"addButton",
 			"self",
 			"panel2",
@@ -788,83 +798,24 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 2,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "GUI/mainWindow.py",
+					"file": "main.py",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 6690,
+						"buffer_size": 699,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								3650,
-								3650
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Python/Python.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 1566.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "Simulation/simulation.py",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 4362,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								4362,
-								4362
-							]
-						],
-						"settings":
-						{
-							"spell_check": true,
-							"syntax": "Packages/Python/Python.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 1772.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "GUI/window_test.py",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 820,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								640,
-								640
+								48,
+								48
 							]
 						],
 						"settings":
@@ -879,31 +830,63 @@
 					"type": "text"
 				},
 				{
-					"buffer": 3,
-					"file": "main.py",
+					"buffer": 1,
+					"file": "Simulation/simulation.py",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 272,
+						"buffer_size": 5418,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								260,
-								260
+								4889,
+								4889
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Python/Python.tmLanguage"
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 2093.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 3,
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "GUI/mainWindow.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 6690,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1310,
+								1310
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 355.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
 					"type": "text"
 				}
 			]
@@ -964,12 +947,60 @@
 		"selected_items":
 		[
 			[
-				"boxr",
-				"GUI\\boxer_test.py"
+				"mainwi",
+				"GUI\\mainWindow.py"
+			],
+			[
+				"mainwindow",
+				"GUI\\mainWindow.py"
 			],
 			[
 				"main",
-				"main.py"
+				"GUI\\mainWindow.py"
+			],
+			[
+				"simulation",
+				"Simulation\\simulation.py"
+			],
+			[
+				"boxer",
+				"GUI\\boxer_test.py"
+			],
+			[
+				"physi",
+				"Simulation\\physics.py"
+			],
+			[
+				"elment",
+				"Simulation\\Elements\\element.py"
+			],
+			[
+				"space",
+				"Simulation\\space.py"
+			],
+			[
+				"element",
+				"Simulation\\Elements\\element.py"
+			],
+			[
+				"physics",
+				"Simulation\\physics.py"
+			],
+			[
+				"star",
+				"Simulation\\Elements\\star.py"
+			],
+			[
+				"planet",
+				"Simulation\\Elements\\planet.py"
+			],
+			[
+				"simula",
+				"Simulation\\simulation.py"
+			],
+			[
+				"boxr",
+				"GUI\\boxer_test.py"
 			],
 			[
 				"gui",
@@ -984,10 +1015,6 @@
 				"Visualization\\view.py"
 			],
 			[
-				"simula",
-				"Simulation\\simulation.py"
-			],
-			[
 				"run",
 				"GUI\\runDialog.py"
 			],
@@ -996,28 +1023,8 @@
 				"GUI\\mainWindow.py"
 			],
 			[
-				"star",
-				"Visualization\\starModel.py"
-			],
-			[
 				"visu",
 				"Visualization\\visualization.py"
-			],
-			[
-				"space",
-				"Simulation\\space.py"
-			],
-			[
-				"element",
-				"Simulation\\Elements\\element.py"
-			],
-			[
-				"planet",
-				"Simulation\\Elements\\planet.py"
-			],
-			[
-				"physics",
-				"Simulation\\physics.py"
 			],
 			[
 				"simu",
@@ -1026,10 +1033,6 @@
 			[
 				"spac",
 				"Simulation\\space.py"
-			],
-			[
-				"simulation",
-				"test_simulation.py"
 			],
 			[
 				"ple",
@@ -1074,10 +1077,6 @@
 			[
 				"phy",
 				"Simulation\\physics.py"
-			],
-			[
-				"physi",
-				"test_physics.py"
 			],
 			[
 				"tes",

@@ -1,4 +1,5 @@
 from Simulation.simulation import Simulation
+from GUI.mainWindow import MainWindow
 from visual import *
 """
 This file works as a interface between
@@ -7,8 +8,7 @@ This file works as a interface between
 
 
 def main():
-    w = window(menus=False, title="VPython",
-               x=0, y=0, width=1920, height=1080)
+    w = MainWindow("Planet Simulator")
 
     display(window=w, x=50, y=30, width=w.width*0.8,
             height=w.height*0.8)
@@ -22,7 +22,7 @@ def main():
     # @ simulationspeed: How many calculations per second
     # @ timestep: How much time elapses
     # @ freq: How many calculations between model updation
-    simu.run(50, 0.01, 2)
+    simu.run(50, 0.1, 2)
 
 if __name__ == '__main__':
     main()
