@@ -1,0 +1,7 @@
+# This is simulation state file
+# Tyyppi label position(muodossa: x,y,z) velocity(x,y,z) mass color
+Planet Aurinko 0.0,0.0,0.0 0.0,0.0,0.0 10000000000.0 yellow
+Planet Maa 0.0,10.0,10.0 1.0,0.0,0.0 100000000.0 red
+Planet Bemu 0.0,-10.0,-10.0 -1.0,0.0,0.0 100000000.0 cyan
+Planet kolmas 0.0,0.0,0.0 0.0,1.0,1.0 10000000.0 cyan
+Planet HOMO 100.0,100.0,100.0 0.0,0.0,0.0 1e+11 magenta

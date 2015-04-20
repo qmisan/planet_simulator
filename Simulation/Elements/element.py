@@ -1,5 +1,4 @@
 from visual import *
-from Simulation.physics import *
 
 
 class Element(object):
