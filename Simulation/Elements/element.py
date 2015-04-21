@@ -14,7 +14,7 @@ class Element(object):
               "white": color.white, "orange": color.orange,
               "magenta": color.magenta}
 
-    def __init__(self, label, position, velocity, mass, color, space):
+    def __init__(self, label, position, velocity, mass, color):
         pass
 
     def calculate_next(self, dt):

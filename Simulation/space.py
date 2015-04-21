@@ -10,6 +10,7 @@ class Space(object):
         self.element_list = []
 
     def add_element(self, element):
+        element.space = self
         self.element_list.append(element)
 
     def calculate_physics(self, time):

@@ -25,6 +25,9 @@ class Test(unittest.TestCase):
         self.space = Space()
 
     def test_physics(self):
+    	"""
+    	In test 2 elements, star and planet
+    	"""
         pass
 
     def test_element(self):
@@ -73,7 +76,7 @@ class Test(unittest.TestCase):
         self.assertEqual(self.space.element_list[0].label, "Testi1",
                          "add_element is not working properly")
 
-        # 
+        # Test update
 
     def test_simulation(self):
         pass
