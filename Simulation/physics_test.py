@@ -14,52 +14,66 @@ class Test(unittest.TestCase):
         In setUp make needed testing structure (class instances etc)
         """
 
+        # Planet
+        self.planet = Planet("Testi1", vector(1, 2, 3),
+                             vector(1, 2, 3), 100, color.green, None)
+        # Star
+        self.star = Star("Testi2", vector(0, 0, 0),
+                         vector(0, 0, 0), 100, None)
+
+        #Space
+        self.space = Space()
+
     def test_physics(self):
         pass
 
     def test_element(self):
 
-        # Planet
-        test_planet = Planet("Testi1", vector(1, 2, 3),
-                             vector(1, 2, 3), 100, color.green, None)
         # Init values
-        self.assertEqual(test_planet.label, "Testi1",
+        self.assertEqual(self.planet.label, "Testi1",
                          "Name was not implemented properly")
-        self.assertEqual(test_planet.position, vector(1, 2, 3),
+        self.assertEqual(self.planet.position, vector(1, 2, 3),
                          "Position was not implemented properly")
-        self.assertEqual(test_planet.velocity, vector(1, 2, 3),
+        self.assertEqual(self.planet.velocity, vector(1, 2, 3),
                          "Velocity was not implemented properly")
-        self.assertEqual(test_planet.mass, 100,
+        self.assertEqual(self.planet.mass, 100,
                          "Mass was not implemented properly")
-        self.assertEqual(test_planet.space, None,
+        self.assertEqual(self.planet.space, None,
                          "Parent space was not implemented properly")
 
-        # Star
-        test_star = Star("Testi2", vector(0, 0, 0),
-                         vector(0, 0, 0), 100, None)
         # Init values
-        self.assertEqual(test_star.label, "Testi2",
+        self.assertEqual(self.star.label, "Testi2",
                          "Name was not implemented properly")
-        self.assertEqual(test_star.position, vector(0, 0, 0),
+        self.assertEqual(self.star.position, vector(0, 0, 0),
                          "Position was not implemented properly")
-        self.assertEqual(test_star.velocity, vector(0, 0, 0),
+        self.assertEqual(self.star.velocity, vector(0, 0, 0),
                          "Velocity was not implemented properly")
-        self.assertEqual(test_star.mass, 100,
+        self.assertEqual(self.star.mass, 100,
                          "Mass was not implemented properly")
-        self.assertEqual(test_star.space, None,
+        self.assertEqual(self.star.space, None,
                          "Parent space was not implemented properly")
 
         # Test for element methods update, __str__ and get_color
-        new_pos = test_planet.velocity + test_planet.position
-        test_planet.new_pos = new_pos
-        test_planet.update()
-        self.assertEqual(test_planet.position, vector(2, 4, 6),
-                         "Element method update not working proberly")
-
+        new_pos = self.planet.velocity + self.planet.position
+        self.planet.next_pos = new_pos
+        self.planet.update()
+        self.assertEqual(self.planet.position, vector(2, 4, 6),
+                         "Element method update not working proberly,"
+                         + "got {}.".format(self.planet.position))
 
     def test_space(self):
-        pass
+        # Init
+        self.assertTrue(self.space, "Initiating space is not working properly")
 
+        # Testing add_element
+        self.space.add_element(self.planet)
+        self.assertEqual(len(self.space.element_list), 1,
+                         "add_element is not working properly")
+
+        self.assertEqual(self.space.element_list[0].label, "Testi1",
+                         "add_element is not working properly")
+
+        # 
 
     def test_simulation(self):
         pass
