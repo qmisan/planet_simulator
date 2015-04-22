@@ -1,6 +1,5 @@
 from visual import *
 
-
 class Element(object):
     """
     docstring for Element
@@ -16,21 +15,6 @@ class Element(object):
 
     def __init__(self, label, position, velocity, mass, color):
         pass
-
-    def calculate_next(self, dt):
-        """
-        This calculates next position and velocity
-        """
-        for element in self.space.element_list:
-            if element.position != self.position:
-                
-                self.acceleration = acceleration(gravity(self, element), self.mass)
-
-        self.next_pos = (self.position + self.velocity *
-                         dt + 0.5 * self.acceleration * (dt**2))  # New pos
-
-        print(self.next_pos)
-        self.next_vel += self.acceleration*dt  # New velocity
 
     def update(self):
         """

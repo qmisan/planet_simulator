@@ -1,5 +1,5 @@
 from visual import *  # For vectors
-
+from physics import *
 
 class Space(object):
     """
@@ -15,9 +15,13 @@ class Space(object):
 
     def calculate_physics(self, time):
         for element in self.element_list:
-            element.calculate_next(time)
-        # NOTE: Test print
-        print("Im here")
+            for other in self.element_list:
+                if not (other.position == element.position):
+                    g = gravity(element, other)
+                    element.acceleration = element.acceleration + g/element.mass
+            element.next_pos = element.position + element.velocity*time+0.5*element.acceleration*(time**2)
+            element.next_vel = element.next_vel + element.acceleration*time
+
     def update_physics(self):
         for element in self.element_list:
             element.update()
@@ -48,3 +52,4 @@ class Space(object):
             print("______________________")
             print(element)
             print("______________________")
+

@@ -219,12 +219,8 @@ class MainWindow(window):
                 pass
                 # raise WrongSimulationParameterError("")
 
-        try:
             # NOTE: Test print
-            print("Im here and i really wanna to tis :DD")
             self.simulation.run(simulation_speed, simulation_timestep, frequency)
-        except:
-             pass
 
     def OnPause(self, event):
         while(1):

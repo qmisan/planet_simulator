@@ -36,7 +36,7 @@ class Simulation(object):
                         line_data[5].strip("\n")
                         clr = Element.colors[line_data[5]]
                         new_element = Planet(label, position, velocity,
-                                             mass, clr, self.space)
+                                             mass, clr)
                         self.add(new_element)
 
                     elif line_data[0].strip().lower() == "star":
@@ -51,7 +51,7 @@ class Simulation(object):
                         line_data[5].strip("\n")
                         # clr = Element.colors[line_data[5]]
                         new_element = Star(label, position,
-                                           velocity, mass, self.space)
+                                           velocity, mass)
                         self.add(new_element)
 
                     # NOTE: Other types here
@@ -122,29 +122,15 @@ class Simulation(object):
         (seconds/real second)
         """
         i = 0
-        # NOTE: Test print
-        print("I TRY TO OPEN THIS LOL")
-        print("Speed:{}\nTimestep:{}\nFrequency:{}\n".format(speed,timestep,frequency))
+
         while(1):
-            # NOTE: Test print
             rate(speed)
-            # NOTE: Test print
-
-            print("I go here too inside the loop")
-            # TODO: running simulation doesn't go inside space.calculate_physics
             self.space.calculate_physics(timestep)
-            # NOTE: Test print
-            print("I calculate physics")
             self.space.update_physics()
-
-            # NOTE: Test print
-            print("I update physics")
 
             self.render()
             i = i + 1
             # print(str(self.space.element_list[0]))
-            # NOTE: Test print
-            print("I even go here but i no rly care :DDD")
             if i == frequency:
                 self.render()
                 i = 0

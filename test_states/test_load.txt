@@ -9,6 +9,4 @@ Planet Earth 0,5,0 1,0,0 100 red
 # Planet3
 Planet Bemu 0,-5,0 -1,0,0 100 orange
 # Planet4
-Planet kolmas 0,0,20 0,1,0 10 cyan
-# HOMO
-Planet HOMO 1,10,0 0,0,0 20 magenta
+# Planet kolmas 0,0,20 0,1,0 10 cyan
