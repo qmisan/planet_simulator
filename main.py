@@ -11,7 +11,6 @@ def main():
 	# Main window for simulatos
     w = MainWindow("Planet Simulator")
 
-
     # Run takes simulationspeed timestep and display update frequency
     # parameters
     # @ simulationspeed: How many calculations per second

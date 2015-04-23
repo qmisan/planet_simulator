@@ -81,11 +81,11 @@ class MainWindow(window):
                                        'Run Simulation',
                                        wx.Bitmap('GUI/run_button.png'))
         self.win.Bind(wx.EVT_TOOL, self.OnRun, runTool)
- 
+
         # Creating 'Pause' button to toolbar
         pauseTool = toolbar.AddLabelTool(wx.ID_ANY,
-                                              'Pause Simulation',
-                                              wx.Bitmap('GUI/pause_button.png'))
+                                         'Pause Simulation',
+                                         wx.Bitmap('GUI/pause_button.png'))
         self.win.Bind(wx.EVT_TOOL, self.OnPause, pauseTool)
 
         toolbar.Realize()  # IDIOT U FORGOT TO SHOW IT!!!!!
@@ -175,6 +175,7 @@ class MainWindow(window):
         to ask user simulation run parameters
         @para
         """
+        # TODO: Run in mainWindow not working. This needs to be fixed
         simulation_speed = 0
         simulation_timestep = 0
 
