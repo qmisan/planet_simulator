@@ -4,6 +4,14 @@
 		"selected_items":
 		[
 			[
+				"loc",
+				"local_display_size〔variable〕"
+			],
+			[
+				"simulati",
+				"simulation_speed〔variable〕"
+			],
+			[
 				"ti",
 				"timestep〔argument〕"
 			],
@@ -69,10 +77,6 @@
 			],
 			[
 				"simu",
-				"simulation_timestep	statement"
-			],
-			[
-				"simulati",
 				"simulation_timestep	statement"
 			],
 			[
@@ -327,7 +331,15 @@
 			"file": "main.py",
 			"settings":
 			{
-				"buffer_size": 579,
+				"buffer_size": 578,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "Simulation/space.py",
+			"settings":
+			{
+				"buffer_size": 1800,
 				"line_ending": "Windows"
 			}
 		},
@@ -335,7 +347,7 @@
 			"file": "Simulation/run_test.py",
 			"settings":
 			{
-				"buffer_size": 1446,
+				"buffer_size": 1568,
 				"line_ending": "Windows"
 			}
 		},
@@ -343,16 +355,24 @@
 			"file": "GUI/mainWindow.py",
 			"settings":
 			{
-				"buffer_size": 8301,
+				"buffer_size": 8307,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "test_states/earth.txt",
 			"settings":
 			{
-				"buffer_size": 66,
+				"buffer_size": 0,
 				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "test_states/simple2.txt",
+			"settings":
+			{
+				"buffer_size": 104,
+				"line_ending": "Windows",
+				"name": "Star Aurinko 0,0,0 0,0,0 5e10"
 			}
 		},
 		{
@@ -360,6 +380,22 @@
 			"settings":
 			{
 				"buffer_size": 5855,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "test_states/simple2.txt",
+			"settings":
+			{
+				"buffer_size": 104,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "test_states/simple.txt",
+			"settings":
+			{
+				"buffer_size": 66,
 				"line_ending": "Windows"
 			}
 		}
@@ -586,6 +622,7 @@
 	],
 	"file_history":
 	[
+		"/C/Users/Henri/Documents/GitHub/Planet_Simulator/test_states/earth.txt",
 		"/C/Users/Henri/Documents/GitHub/Planet_Simulator/test_states/test_load.txt",
 		"/C/Users/Henri/Documents/GitHub/Planet_Simulator/Simulation/Elements/element.py",
 		"/C/Users/Henri/Documents/GitHub/Planet_Simulator/Simulation/run_test.py",
@@ -712,8 +749,7 @@
 		"/C/cygwin64/home/Henri/Y2/redo_undo/doc/time_code.m.html",
 		"/C/cygwin64/home/Henri/Y2/redo_undo/doc/undo_manager.m.html",
 		"/C/cygwin64/home/Henri/Y2/redo_undo/doc/video_section.m.html",
-		"/C/cygwin64/home/Henri/Y2/redo_undo/doc/video_track.m.html",
-		"/C/cygwin64/home/Henri/Y2/redo_undo/undo/__init__.py"
+		"/C/cygwin64/home/Henri/Y2/redo_undo/doc/video_track.m.html"
 	],
 	"find":
 	{
@@ -731,6 +767,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"dlg",
 			"onRun",
 			"a",
 			"pos",
@@ -876,7 +913,7 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 579,
+						"buffer_size": 578,
 						"regions":
 						{
 						},
@@ -900,19 +937,50 @@
 				},
 				{
 					"buffer": 1,
-					"file": "Simulation/run_test.py",
+					"file": "Simulation/space.py",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1446,
+						"buffer_size": 1800,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1446,
-								1446
+								262,
+								262
+							]
+						],
+						"settings":
+						{
+							"history_list_is_closing": true,
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "Simulation/run_test.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1568,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1567,
+								1567
 							]
 						],
 						"settings":
@@ -922,27 +990,27 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 648.0,
+						"translation.y": 124.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 4,
 					"type": "text"
 				},
 				{
-					"buffer": 2,
+					"buffer": 3,
 					"file": "GUI/mainWindow.py",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 8301,
+						"buffer_size": 8307,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								7984,
-								7984
+								8022,
+								8022
 							]
 						],
 						"settings":
@@ -953,27 +1021,26 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 3605.0,
+						"translation.y": 3557.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 3,
+					"stack_index": 2,
 					"type": "text"
 				},
 				{
-					"buffer": 3,
-					"file": "test_states/earth.txt",
+					"buffer": 4,
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 66,
+						"buffer_size": 0,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								22,
-								22
+								0,
+								0
 							]
 						],
 						"settings":
@@ -984,11 +1051,46 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 4,
+					"stack_index": 6,
+					"type": "text"
+				}
+			]
+		},
+		{
+			"selected": 1,
+			"sheets":
+			[
+				{
+					"buffer": 5,
+					"file": "test_states/simple2.txt",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 104,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								104,
+								104
+							]
+						],
+						"settings":
+						{
+							"auto_name": "Star Aurinko 0,0,0 0,0,0 5e10",
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
 					"type": "text"
 				},
 				{
-					"buffer": 4,
+					"buffer": 6,
 					"file": "Simulation/simulation.py",
 					"semi_transient": false,
 					"settings":
@@ -1000,22 +1102,79 @@
 						"selection":
 						[
 							[
-								5482,
-								5482
+								5206,
+								5206
 							]
 						],
 						"settings":
 						{
 							"auto_complete": false,
+							"history_list_is_closing": true,
 							"syntax": "Packages/Python/Python.tmLanguage",
 							"tab_size": 4,
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 2052.0,
+						"translation.y": 1890.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "test_states/simple2.txt",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 104,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								36,
+								36
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 7,
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "test_states/simple.txt",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 66,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								66,
+								66
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 8,
 					"type": "text"
 				}
 			]
@@ -1038,11 +1197,18 @@
 				0,
 				1,
 				1
+			],
+			[
+				1,
+				0,
+				2,
+				1
 			]
 		],
 		"cols":
 		[
 			0.0,
+			0.5,
 			1.0
 		],
 		"rows":
@@ -1078,12 +1244,16 @@
 		"selected_items":
 		[
 			[
-				"simulation",
-				"Simulation\\simulation.py"
-			],
-			[
 				"main",
 				"GUI\\mainWindow.py"
+			],
+			[
+				"simple",
+				"test_states\\simple.txt"
+			],
+			[
+				"simulation",
+				"Simulation\\simulation.py"
 			],
 			[
 				"run",

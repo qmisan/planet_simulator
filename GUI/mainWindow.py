@@ -19,18 +19,26 @@ class MainWindow(window):
     ID_TOOLBAR = wx.NewId()
     simulation = None
 
+    # Settings
+    # NOTE: Add more settings concerning whole program here
+    settings = {
+                "labels": True,
+                "state_saved" : False
+                }
+
     def __init__(self, title):
 
         # Frame initialization
 
         # Get local display size
         local_display_size = wx.GetDisplaySize()
+        print(local_display_size)
 
         #  Initialize mainwindow with size 0.5 * width
         #  and full height of local display
         window.__init__(self, parent=None, title=title,
-                        size=(local_display_size[0]/2,
-                              0.8*local_display_size[1]),
+                        size=(local_display_size[0],
+                              local_display_size[1]),
                         _make_panel=False)
 
         self.SetMenubar()
@@ -81,11 +89,11 @@ class MainWindow(window):
                                        'Run Simulation',
                                        wx.Bitmap('GUI/run_button.png'))
         self.win.Bind(wx.EVT_TOOL, self.OnRun, runTool)
-
+ 
         # Creating 'Pause' button to toolbar
         pauseTool = toolbar.AddLabelTool(wx.ID_ANY,
-                                         'Pause Simulation',
-                                         wx.Bitmap('GUI/pause_button.png'))
+                                              'Pause Simulation',
+                                              wx.Bitmap('GUI/pause_button.png'))
         self.win.Bind(wx.EVT_TOOL, self.OnPause, pauseTool)
 
         toolbar.Realize()  # IDIOT U FORGOT TO SHOW IT!!!!!
@@ -116,8 +124,11 @@ class MainWindow(window):
             self.filename = dlg.GetFilename()
             self.dirname = dlg.GetDirectory()
 
+            # NOTE: Testprint
+            for key in self.settings:
+                print key
             # Now we have path to selected file
-            self.simulation = Simulation()
+            self.simulation = Simulation(**self.settings)
             self.simulation.load(os.path.join(self.dirname, self.filename))
             self.simulation.space.print_elements()
 
@@ -151,12 +162,12 @@ class MainWindow(window):
         if saveFileDialog.ShowModal() == wx.ID_OK:
             self.filename = saveFileDialog.GetFilename()
             self.dirname = saveFileDialog.GetDirectory()
-            f = open(os.path.join(self.dirname, self.filename), 'w')
 
-            # Now we have bath to selected file
-            # simulation.load(f)
+            # Save state
+            self.simulation.save(os.path.join(self.dirname, self.filename))
+            self.settings["state_saved"] = True
 
-            f.close()
+        # Destroy file dialog
         saveFileDialog.Destroy()
 
     def OnExit(self, event):
@@ -175,7 +186,6 @@ class MainWindow(window):
         to ask user simulation run parameters
         @para
         """
-        # TODO: Run in mainWindow not working. This needs to be fixed
         simulation_speed = 0
         simulation_timestep = 0
 
@@ -195,17 +205,17 @@ class MainWindow(window):
         dlg.SetValue("100")
 
         if dlg.ShowModal() == wx.ID_OK:
-            simulation_speed = dlg.GetValue()
+            simulation_speed = int(dlg.GetValue())
             if not isinstance(simulation_speed, int):
                 pass
                 # raise WrongSimulationParameterError("")
 
         # Asking simulation speed
         dlg2 = wx.TextEntryDialog(None, "Set timestep (seconds)", "Run")
-        dlg2.SetValue("0.1")
+        dlg2.SetValue("1")
 
         if dlg2.ShowModal() == wx.ID_OK:
-            simulation_timestep = dlg2.GetValue()
+            simulation_timestep = int(dlg2.GetValue())
             if not isinstance(simulation_timestep, int):
                 pass
                 # raise WrongSimulationParameterError("")
@@ -215,13 +225,12 @@ class MainWindow(window):
         dlg3.SetValue("2")
 
         if dlg3.ShowModal() == wx.ID_OK:
-            frequency = dlg3.GetValue()
+            frequency = int(dlg3.GetValue())
             if not isinstance(frequency, int):
                 pass
                 # raise WrongSimulationParameterError("")
 
-            # NOTE: Test print
-            self.simulation.run(simulation_speed, simulation_timestep, frequency)
+        self.simulation.run(simulation_speed, simulation_timestep, frequency)
 
     def OnPause(self, event):
         while(1):

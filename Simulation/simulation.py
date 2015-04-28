@@ -11,8 +11,18 @@ class Simulation(object):
     It owns current space along with its elements.
     It also runs physics part forward in time.
     """
-    def __init__(self):
+    # Settings
+    labels = True
+
+
+    def __init__(self, **kwargs):
         self.space = Space()
+
+        # NOTE: TESTPRINT
+        for key in kwargs:
+            print(key)
+        if kwargs["labels"] == False:
+            self.labels = False
 
     def load(self, file):  # NOTE: DONE Parsing state from file
         """
@@ -91,12 +101,13 @@ class Simulation(object):
         for element in self.space.element_list:
             element.visual = sphere(pos=element.position,
                                     make_trail=True, radius=1)
-            element.visual.label = label(pos=element.visual.pos,
-                                         text=str(element), xoffset=20,
-                                         yoffset=12,
-                                         space=element.visual.radius,
-                                         height=10, border=6,
-                                         font='sans')
+            if self.labels:
+                element.visual.label = label(pos=element.visual.pos,
+                                             text=str(element), xoffset=20,
+                                             yoffset=12,
+                                             space=element.visual.radius,
+                                             height=10, border=6,
+                                             font='sans')
 
             if element.type == "Planet":
                 # Earth has unique texture material
@@ -113,7 +124,7 @@ class Simulation(object):
                 element.visual.material = materials.emissive
                 element.visual.radius = 2
 
-    def run(self, speed, timestep, frequency):
+    def run(self, speed, timestep, frequency, **kwargs):
         """
         Runs simulation forward from current state with current parameters
         @param speed: How many times physics calculated per second
@@ -142,6 +153,9 @@ class Simulation(object):
         """
         for element in self.space.element_list:
             element.visual.pos = element.position
-            element.visual.label.pos = element.visual.pos
-            element.visual.label.text = str(element)
+
+            # If options define to show labels
+            if self.labels:
+                element.visual.label.pos = element.visual.pos
+                element.visual.label.text = str(element)
 
