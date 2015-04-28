@@ -23,7 +23,7 @@ class MainWindow(window):
     # NOTE: Add more settings concerning whole program here
     settings = {
                 "labels": True,
-                "state_saved" : False
+                "state_saved" : True
                 }
 
     def __init__(self, title):
@@ -140,7 +140,7 @@ class MainWindow(window):
             # self.simulation.make_visuals()
             # self.simulation.render()
             # rate = 
-
+        self.settings["state_saved"] = True
         dlg.Destroy()
         while(1):
             rate(100)
@@ -171,14 +171,28 @@ class MainWindow(window):
         saveFileDialog.Destroy()
 
     def OnExit(self, event):
-        dlg = wx.MessageDialog(self.win,
-                               "Do you really want to close this application?",
-                               "Confirm Exit",
-                               wx.OK | wx.CANCEL | wx.ICON_QUESTION)
-        result = dlg.ShowModal()
-        dlg.Destroy()
-        if result == wx.ID_OK:
-            exit()
+
+        # Save before exit dialog
+        if self.settings["state_saved"] == False:
+            dlg = wx.MessageDialog(self.win,
+                                   "Do you want to save it?",
+                                   "State not saved",
+                                   wx.YES | wx.NO | wx.ICON_QUESTION)
+            result = dlg.ShowModal()
+            dlg.Destroy()
+            if result == wx.ID_YES:
+                print("I WENT HERE")
+                self.OnSaveAs(wx.EVT_MENU)
+
+        else:
+            dlg = wx.MessageDialog(self.win,
+                                   "Do you really want to close this application?",
+                                   "Confirm Exit",
+                                   wx.OK | wx.CANCEL | wx.ICON_QUESTION)
+            result = dlg.ShowModal()
+            dlg.Destroy()
+            if result == wx.ID_OK:
+                exit()
 
     def OnRun(self, event):
         """
