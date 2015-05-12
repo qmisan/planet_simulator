@@ -23,7 +23,9 @@ class MainWindow(window):
     labels = True
     toolbarheight = 10
     state_saved = False
-
+    scene = None
+    screen_size = wx.GetDisplaySize()
+    
     def __init__(self, title):
 
         # Frame initialization
@@ -31,19 +33,17 @@ class MainWindow(window):
         # Get local display size NOTE: Local display size not needed if always fullscreen
         # local_display_size = wx.GetDisplaySize()
         # print(local_display_size)
+        # Initialize mainwindow
+        window.__init__(self, title="Planet Simulator", _make_panel=True, width = self.screen_size[0],
+                        height = self.screen_size[1] ) # kw _make_panel=False 
 
-        #  Initialize mainwindow with size 0.5 * width
-        #  and full height of local display
-        window.__init__(self, title=title)
-
-        
         # Makes program constant fullscreen
         self.fullscreen = True
 
         self.SetMenubar()
         self.SetToolbar()
-
-        self.win.Centre()
+        self.SetDisplay()
+        self.SetStart()
 
     def SetMenubar(self):
 
@@ -253,8 +253,17 @@ class MainWindow(window):
         self.simulation.run(simulation_speed, simulation_timestep, frequency)
 
     def OnPause(self, event):
-        while(1):
-            rate(0)
+        self.simulation.stop()
 
     def SetDisplay(self):
-        pass
+        # Display
+        self.scene = display(window=self, width=0.8*self.screen_size[0], 
+                             height = 0.8*self.screen_size[1], autoscale=True)
+
+    def SetStart(self):
+        # Backgroundcolor to white
+        # self.scene.background(color.white)
+
+        # Text
+        text(text='Welcome to planet simulator!',
+             align='center', depth=-0.3, color=color.green)

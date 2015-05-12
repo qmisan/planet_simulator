@@ -11,19 +11,19 @@ class ToolbarPanel(wx.Panel):
         """
 
         # Self initiate and sizers
-        wx.Panel.__init__(self, parent=parent)
+        wx.Panel.__init__(self, parent=parent.panel)
         self.frame = parent
-        self.controlSizer = wx.BoxSizer(wx.HORIZONTAL)
+        self.Sizer = wx.BoxSizer(wx.HORIZONTAL)
 
         self.runButton = wx.Button(self, label="Run")
         self.runButton.Bind(wx.EVT_BUTTON, self.onRunWidget)
-        self.controlSizer.Add(self.runButton, 0, wx.CENTER | wx.ALL, 5)
+        self.Sizer.Add(self.runButton, 0, wx.CENTER | wx.ALL, 5)
 
         self.pauseButton = wx.Button(self, label="Pause")
         self.pauseButton.Bind(wx.EVT_BUTTON, self.onPauseWidget)
-        self.controlSizer.Add(self.pauseButton, 0, wx.CENTER | wx.ALL, 5)
+        self.Sizer.Add(self.pauseButton, 0, wx.CENTER | wx.ALL, 5)
 
-        self.SetSizer(self.controlSizer)
+        self.SetSizer(self.Sizer)
 
     def onRunWidget(self, event):
         """Run simulation"""

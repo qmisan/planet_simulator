@@ -5,7 +5,7 @@
 # Planet1
 Star Aurinko 0,0,0 0,0,0 2e10
 # Planet2
-Planet Earth 0,5,0 1,0,0 100 red
+Planet Earth 0,5,0 1,0,0 100
 # Planet3
 Planet Bemu 0,-5,0 -1,0,0 100 orange
 # Planet4

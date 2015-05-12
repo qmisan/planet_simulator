@@ -11,9 +11,9 @@ class Simulation(object):
     It owns current space along with its elements.
     It also runs physics part forward in time.
     """
-    # Settings
-    scene = None
-
+    # Flags
+    running = False
+    cam_follow = False
 
     def __init__(self, window):
         self.space = Space()
@@ -96,12 +96,11 @@ class Simulation(object):
         """
 
         # If already frame old one needs to be destroyed
-        if not self.scene == None:
-            self.scene.delete()
+        if not self.win.scene == None:
+            self.win.scene.delete()
 
         # Initializing 3D-canvas
-        self.scene = display(window = self.win, x = self.win.toolbarheight,
-                           y = 0.1*self.win.width)
+        self.win.SetDisplay()
 
         for element in self.space.element_list:
             element.visual = sphere(pos=element.position, make_trail=True, radius=1)
@@ -128,6 +127,10 @@ class Simulation(object):
                 element.visual.material = materials.emissive
                 element.visual.radius = 2
 
+    def center(self,element):
+        scene.center(element)
+
+
     def run(self, speed, timestep, frequency, **kwargs):
         """
         Runs simulation forward from current state with current parameters
@@ -136,6 +139,7 @@ class Simulation(object):
         @param frequency: How many many times visual models updated per speed
         (seconds/real second)
         """
+        self.running = True
         i = 0
 
         while(1):
@@ -150,6 +154,12 @@ class Simulation(object):
                 self.render()
                 i = 0
 
+    def stop(self):
+        if self.running == True:
+            self.running = False
+        while(True):
+            rate(1)
+
     def render(self):
         """
         Renders space for every frame and updates visual model position
@@ -159,6 +169,6 @@ class Simulation(object):
             element.visual.pos = element.position
 
             # If options define to show.win.settings["labels"]
-            if self.win.settings["labels"]:
+            if self.win.labels:
                 element.visual.label.pos = element.visual.pos
                 element.visual.label.text = str(element)
