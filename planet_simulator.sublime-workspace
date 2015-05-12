@@ -355,16 +355,16 @@
 			"file": "GUI/mainWindow.py",
 			"settings":
 			{
-				"buffer_size": 9551,
+				"buffer_size": 10173,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "/C/Users/Henri/AppData/Roaming/Sublime Text 3/Packages/SublimeLinter/SublimeLinter.sublime-settings",
+			"file": "GUI/boxer_test.py",
 			"settings":
 			{
-				"buffer_size": 1000,
-				"line_ending": "Unix"
+				"buffer_size": 8635,
+				"line_ending": "Windows"
 			}
 		},
 		{
@@ -380,14 +380,6 @@
 			"settings":
 			{
 				"buffer_size": 6495,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "test_states/test_load.txt",
-			"settings":
-			{
-				"buffer_size": 300,
 				"line_ending": "Windows"
 			}
 		}
@@ -415,10 +407,22 @@
 	"build_varint": "",
 	"command_palette":
 	{
-		"height": 392.0,
-		"last_filter": "packa",
+		"height": 81.0,
+		"last_filter": "install",
 		"selected_items":
 		[
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"remo",
+				"Package Control: Remove Package"
+			],
+			[
+				"Pakca",
+				"Package Control: Remove Package"
+			],
 			[
 				"packa",
 				"Package Control: Install Package"
@@ -448,15 +452,7 @@
 				"Preferences: Package Control Settings – User"
 			],
 			[
-				"install",
-				"Package Control: Install Package"
-			],
-			[
 				"remove",
-				"Package Control: Remove Package"
-			],
-			[
-				"remo",
 				"Package Control: Remove Package"
 			],
 			[
@@ -584,7 +580,7 @@
 				"Package Control: Install Package"
 			]
 		],
-		"width": 528.0
+		"width": 400.0
 	},
 	"console":
 	{
@@ -619,9 +615,17 @@
 	],
 	"file_history":
 	[
+		"/C/Users/Henri/Documents/Projektit/Planet_Simulator/test_states/test_load.txt",
+		"/C/Users/Henri/AppData/Roaming/Sublime Text 3/Packages/Default/Preferences.sublime-settings",
+		"/C/Users/Henri/AppData/Roaming/Sublime Text 3/Packages/User/Package Control.sublime-settings",
+		"/C/Users/Henri/AppData/Roaming/Sublime Text 3/Packages/User/Default (Windows).sublime-keymap",
+		"/C/Users/Henri/AppData/Roaming/Sublime Text 3/Packages/User/JSON.sublime-settings",
+		"/C/Users/Henri/AppData/Roaming/Sublime Text 3/Packages/User/Distraction Free.sublime-settings",
+		"/C/Users/Henri/AppData/Roaming/Sublime Text 3/Packages/User/Preferences.sublime-settings",
+		"/C/Users/Henri/AppData/Roaming/Sublime Text 3/Packages/GitGutter/GitGutter.sublime-settings",
+		"/C/Users/Henri/AppData/Roaming/Sublime Text 3/Packages/SublimeLinter/SublimeLinter.sublime-settings",
 		"/C/Users/Henri/AppData/Roaming/Sublime Text 3/Packages/SublimeLinter/Default (Windows).sublime-keymap",
 		"/C/Users/Henri/AppData/Roaming/Sublime Text 3/Packages/User/SublimeLinter.sublime-settings",
-		"/C/Users/Henri/AppData/Roaming/Sublime Text 3/Packages/SublimeLinter/SublimeLinter.sublime-settings",
 		"/C/Python27/lib/site-packages/visual_common/create_display.py",
 		"/C/Users/Henri/Documents/Projektit/Planet_Simulator/GUI/toolbarPanel.py",
 		"/C/Users/Henri/Documents/Projektit/Planet_Simulator/Simulation/Elements/planet.py",
@@ -640,7 +644,6 @@
 		"/C/Users/Henri/Documents/Projektit/Planet_Simulator/GUI/boxer_test.py",
 		"/C/Python27/lib/site-packages/visual_common/primitives.py",
 		"/C/Python27/lib/site-packages/wx-3.0-msw/wx/glcanvas.py",
-		"/C/Users/Henri/AppData/Roaming/Sublime Text 3/Packages/Default/Preferences.sublime-settings",
 		"/C/Users/Henri/Documents/Projektit/Planet_Simulator/Simulation/run_test.py",
 		"/C/Users/Henri/Documents/Projektit/Planet_Simulator/test_states/simple.txt",
 		"/C/Users/Henri/Documents/Projektit/Planet_Simulator/test_states/simple2.txt",
@@ -685,13 +688,10 @@
 		"/C/Users/Henri/Desktop/project_backup/Visualization/view.py",
 		"/C/Users/Henri/Desktop/project_backup/test.py",
 		"/C/Users/Henri/Desktop/project_backup/main.py",
-		"/C/Users/Henri/AppData/Roaming/Sublime Text 3/Packages/User/Default (Windows).sublime-keymap",
 		"/C/Users/Henri/Documents/Koulu/Tietokannat/Harjoitukset/Kierros4/query2.sql",
 		"/C/Users/Henri/AppData/Roaming/Sublime Text 3/Packages/Anaconda/Anaconda.sublime-settings",
 		"/C/Users/Henri/AppData/Roaming/Sublime Text 3/Packages/User/Anaconda.sublime-settings",
-		"/C/Users/Henri/AppData/Roaming/Sublime Text 3/Packages/User/Package Control.sublime-settings",
 		"/C/Users/Henri/AppData/Roaming/Sublime Text 3/Packages/User/Python.sublime-settings",
-		"/C/Users/Henri/AppData/Roaming/Sublime Text 3/Packages/User/Preferences.sublime-settings",
 		"/C/Users/Henri/Documents/GitHub/Planet_Simulator/GUI/mainFrame.py",
 		"/C/Users/Henri/Documents/GitHub/project/Visualization/planetModel.py",
 		"/C/Users/Henri/Documents/GitHub/project/Visualization/starModel.py",
@@ -742,11 +742,7 @@
 		"/C/Users/Henri/Downloads/ELEC-A7200_latex-pohja_2.tex",
 		"/C/cygwin64/home/Henri/Y2/hyphenation/finnish_hyphenation_rule.py",
 		"/C/cygwin64/home/Henri/Y2/hyphenation/test.py",
-		"/C/cygwin64/home/Henri/Y2/hyphenation/vowel_rule.py",
-		"/C/cygwin64/home/Henri/Y2/hyphenation/consonant_rule.py",
-		"/C/cygwin64/home/Henri/Y2/hyphenation/hyphenation_rule.py",
-		"/C/Users/Henri/Documents/GitHub/project/Elements/__init__.py",
-		"/C/cygwin64/home/Henri/Y2/planet_simulator/planet_simulator.sublime-project"
+		"/C/cygwin64/home/Henri/Y2/hyphenation/vowel_rule.py"
 	],
 	"find":
 	{
@@ -918,15 +914,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 9551,
+						"buffer_size": 10173,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								8127,
-								8127
+								10173,
+								10173
 							]
 						],
 						"settings":
@@ -938,33 +934,32 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 3924.0,
+						"translation.y": 4723.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 2,
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "/C/Users/Henri/AppData/Roaming/Sublime Text 3/Packages/SublimeLinter/SublimeLinter.sublime-settings",
+					"file": "GUI/boxer_test.py",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1000,
+						"buffer_size": 8635,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								41,
-								41
+								594,
+								568
 							]
 						],
 						"settings":
 						{
-							"auto_complete": true,
-							"syntax": "Packages/JavaScript/JSON.tmLanguage",
+							"syntax": "Packages/Python/Python.tmLanguage",
 							"tab_size": 4,
 							"translate_tabs_to_spaces": true
 						},
@@ -972,9 +967,15 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 3,
 					"type": "text"
-				},
+				}
+			]
+		},
+		{
+			"selected": 0,
+			"sheets":
+			[
 				{
 					"buffer": 2,
 					"file": "main.py",
@@ -988,8 +989,8 @@
 						"selection":
 						[
 							[
-								839,
-								839
+								184,
+								184
 							]
 						],
 						"settings":
@@ -1002,7 +1003,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 0,
 					"type": "text"
 				},
 				{
@@ -1018,8 +1019,8 @@
 						"selection":
 						[
 							[
-								2220,
-								2220
+								6181,
+								6181
 							]
 						],
 						"settings":
@@ -1030,38 +1031,10 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 709.0,
+						"translation.y": 2403.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 3,
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "test_states/test_load.txt",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 300,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								206,
-								206
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Text/Plain text.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 4,
+					"stack_index": 1,
 					"type": "text"
 				}
 			]
@@ -1084,11 +1057,18 @@
 				0,
 				1,
 				1
+			],
+			[
+				1,
+				0,
+				2,
+				1
 			]
 		],
 		"cols":
 		[
 			0.0,
+			0.5,
 			1.0
 		],
 		"rows":
@@ -1123,6 +1103,10 @@
 		"last_filter": "",
 		"selected_items":
 		[
+			[
+				"box",
+				"GUI\\boxer_test.py"
+			],
 			[
 				"test",
 				"test_states\\test_load.txt"

@@ -19,7 +19,7 @@ class MainWindow(window):
     ID_TOOLBAR = wx.NewId()
     simulation = None
 
-    # Settings
+    # Flags
     labels = True
     toolbarheight = 10
     state_saved = False
@@ -29,7 +29,6 @@ class MainWindow(window):
     def __init__(self, title):
 
         # Frame initialization
-
         # Get local display size NOTE: Local display size not needed if always fullscreen
         # local_display_size = wx.GetDisplaySize()
         # print(local_display_size)
@@ -44,6 +43,7 @@ class MainWindow(window):
         self.SetToolbar()
         self.SetDisplay()
         self.SetStart()
+        self.SetCheckBox()
 
     def SetMenubar(self):
 
@@ -267,3 +267,22 @@ class MainWindow(window):
         # Text
         text(text='Welcome to planet simulator!',
              align='center', depth=-0.3, color=color.green)
+
+    def SetCheckBox(self):
+        # Set checkbox to ask if user wants labels in run
+        print(self.screen_size)
+        cb = wx.CheckBox(self.panel, label="Labels", pos=(200,int(self.screen_size[1]*0.83)))
+
+        cb.SetValue(True)
+        cb.Bind(wx.EVT_CHECKBOX, self.ShowOrHideLabels)
+
+    def ShowOrHideLabels(self, event):
+        sender = event.GetEventObject()
+        isChecked = sender.GetValue()
+        if isChecked:
+            self.labels = True
+        else:
+            self.labels = False
+
+        if not self.simulation == None:
+                self.simulation.make_visuals()
