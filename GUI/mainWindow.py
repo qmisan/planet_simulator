@@ -20,26 +20,25 @@ class MainWindow(window):
     simulation = None
 
     # Settings
-    # NOTE: Add more settings concerning whole program here
-    settings = {
-                "labels": True,
-                "state_saved" : True
-                }
+    labels = True
+    toolbarheight = 10
+    state_saved = False
 
     def __init__(self, title):
 
         # Frame initialization
 
-        # Get local display size
-        local_display_size = wx.GetDisplaySize()
-        print(local_display_size)
+        # Get local display size NOTE: Local display size not needed if always fullscreen
+        # local_display_size = wx.GetDisplaySize()
+        # print(local_display_size)
 
         #  Initialize mainwindow with size 0.5 * width
         #  and full height of local display
-        window.__init__(self, parent=None, title=title,
-                        size=(local_display_size[0],
-                              local_display_size[1]),
-                        _make_panel=False)
+        window.__init__(self, title=title)
+
+        
+        # Makes program constant fullscreen
+        self.fullscreen = True
 
         self.SetMenubar()
         self.SetToolbar()
@@ -47,11 +46,10 @@ class MainWindow(window):
         self.win.Centre()
 
     def SetMenubar(self):
+
+        #File menu for basic menu functionality
         filemenu = wx.Menu()
-        # Adding "About" menuItem and setting event
-        menuItem = filemenu.Append(wx.ID_ABOUT, "&About",
-                                   "Information about this program")
-        self.win.Bind(wx.EVT_MENU, self.OnAbout, menuItem)
+
         # Adding "Open" and setting event
         menuItem = filemenu.Append(wx.ID_OPEN, "&Open",
                                    "Open simulation state from file")
@@ -65,11 +63,21 @@ class MainWindow(window):
                                    "Terminate the program")
         self.win.Bind(wx.EVT_MENU, self.OnExit, menuItem)
 
-        # Implement other wx.Menu instances here
 
+        # Help menu for about and information about documentation
+        helpmenu = wx.Menu()
+        # Adding "About" menuItem and setting event
+        menuItem = helpmenu.Append(wx.ID_ABOUT, "&About",
+                                   "Information about this program")
+        self.win.Bind(wx.EVT_MENU, self.OnAbout, menuItem)
+        
+        # NOTE: Implement other wx.Menu instances here
+        
         # Creating the menubar.
         menuBar = wx.MenuBar()
-        menuBar.Append(filemenu, "&File")  # Adding "filemenu" to menuBar
+        # Adding menus
+        menuBar.Append(filemenu, "&File")
+        menuBar.Append(helpmenu, "&Help")
 
         # Add other menus to menubar here
         # -------------------------------
@@ -82,7 +90,7 @@ class MainWindow(window):
 
         # Init toolbar
         toolbar = self.win.CreateToolBar()
-        toolbar.SetToolBitmapSize((20, 10))  # Button size in pixels?
+        toolbar.SetToolBitmapSize((20, self.toolbarheight))  # Button size in pixels?
         # qtool = toolbar.AddLabelTool(wx.ID_ANY,'Quit',wx.Bitmap('run_button.png'))
         # Creating 'RUN' button to toolbar
         runTool = toolbar.AddLabelTool(wx.ID_ANY,
@@ -124,11 +132,9 @@ class MainWindow(window):
             self.filename = dlg.GetFilename()
             self.dirname = dlg.GetDirectory()
 
-            # NOTE: Testprint
-            for key in self.settings:
-                print key
+
             # Now we have path to selected file
-            self.simulation = Simulation(**self.settings)
+            self.simulation = Simulation(self)
             self.simulation.load(os.path.join(self.dirname, self.filename))
             self.simulation.space.print_elements()
 
@@ -140,7 +146,7 @@ class MainWindow(window):
             # self.simulation.make_visuals()
             # self.simulation.render()
             # rate = 
-        self.settings["state_saved"] = True
+        self.state_saved = True
         dlg.Destroy()
         while(1):
             rate(100)
@@ -165,7 +171,7 @@ class MainWindow(window):
 
             # Save state
             self.simulation.save(os.path.join(self.dirname, self.filename))
-            self.settings["state_saved"] = True
+            self.state_saved = True
 
         # Destroy file dialog
         saveFileDialog.Destroy()
@@ -173,7 +179,7 @@ class MainWindow(window):
     def OnExit(self, event):
 
         # Save before exit dialog
-        if self.settings["state_saved"] == False:
+        if self.state_saved == False:
             dlg = wx.MessageDialog(self.win,
                                    "Do you want to save it?",
                                    "State not saved",
@@ -252,8 +258,3 @@ class MainWindow(window):
 
     def SetDisplay(self):
         pass
-
-if __name__ == '__main__':
-    app = wx.App(False)  # Always needs this
-    w = MainWindow("Test Frame")
-    app.MainLoop()

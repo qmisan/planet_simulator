@@ -2,16 +2,17 @@
 
 # toolbar.py
 
+from visual import *
 import wx
 
-class MyFrame(wx.Frame):
+class MyWindow(window):
     def __init__(self, parent, id, title):
-        wx.Frame.__init__(self, parent, id, title, wx.DefaultPosition, wx.Size(350, 250))
+        window.__init__(self, parent, id, title, wx.DefaultPosition, wx.Size(350, 250))
 
-        vbox = wx.BoxSizer(wx.VERTICAL)
-        panel0 = wx.Panel(self,-1)
-        panel0.SetBackgroundColour("YELLOW")
-        vbox.Add(panel0,1,wx.EXPAND | wx.ALL)
+        # vbox = wx.BoxSizer(wx.VERTICAL)
+        # panel0 = wx.Panel(self,-1)
+        self.win.panel.SetBackgroundColour("YELLOW")
+        vbox.Add(self.win.panel,1,wx.EXPAND | wx.ALL)
                            
         hbox = wx.BoxSizer(wx.HORIZONTAL)
         panel1 = wx.Panel(self,-1)
@@ -29,8 +30,8 @@ class MyFrame(wx.Frame):
 
 class MyApp(wx.App):
     def OnInit(self):
-        frame = MyFrame(None, -1, 'MyFrame')
-        frame.Show(True)
+        window = MyWindow(None, -1, 'Mywindow')
+        window.Show(True)
         return True
 
 app = MyApp(0)

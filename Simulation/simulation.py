@@ -12,17 +12,12 @@ class Simulation(object):
     It also runs physics part forward in time.
     """
     # Settings
-    labels = True
+    scene = None
 
 
-    def __init__(self, **kwargs):
+    def __init__(self, window):
         self.space = Space()
-
-        # NOTE: TESTPRINT
-        for key in kwargs:
-            print(key)
-        if kwargs["labels"] == False:
-            self.labels = False
+        self.win = window
 
     def load(self, file):  # NOTE: DONE Parsing state from file
         """
@@ -33,6 +28,7 @@ class Simulation(object):
             for line in data:
                 if not line.startswith("#"):
                     line_data = line.split()
+
                     # If type planet
                     if line_data[0].strip().lower() == "planet":
                         label = line_data[1]
@@ -98,10 +94,18 @@ class Simulation(object):
         """
         Makes visual model for each element in space
         """
+
+        # If already frame old one needs to be destroyed
+        if not self.scene == None:
+            self.scene.delete()
+
+        # Initializing 3D-canvas
+        self.scene = display(window = self.win, x = self.win.toolbarheight,
+                           y = 0.1*self.win.width)
+
         for element in self.space.element_list:
-            element.visual = sphere(pos=element.position,
-                                    make_trail=True, radius=1)
-            if self.labels:
+            element.visual = sphere(pos=element.position, make_trail=True, radius=1)
+            if self.win.labels:
                 element.visual.label = label(pos=element.visual.pos,
                                              text=str(element), xoffset=20,
                                              yoffset=12,
@@ -154,8 +158,7 @@ class Simulation(object):
         for element in self.space.element_list:
             element.visual.pos = element.position
 
-            # If options define to show labels
-            if self.labels:
+            # If options define to show.win.settings["labels"]
+            if self.win.settings["labels"]:
                 element.visual.label.pos = element.visual.pos
                 element.visual.label.text = str(element)
-
