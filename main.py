@@ -15,14 +15,13 @@ def main():
     # window = wx.Frame(None, size=0.5*tuple(wx.GetDisplaySize()))
     # window.Centre()
     # window.Show(True)
-    # Im New line
+
     # sleep(3)
 
     # window.Show(false)
 
     # Main window for simulatos
     w = MainWindow("Planet Simulator")
-
     # Run takes simulationspeed timestep and display update frequency
     # parameters
     # @ simulationspeed: How many calculations per second
