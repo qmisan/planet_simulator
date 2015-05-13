@@ -267,6 +267,10 @@ class MainWindow(window):
         # Text
         text(text='Welcome to planet simulator!',
              align='center', depth=-0.3, color=color.green)
+        planet1 = sphere(pos=(5,-5,-5))
+        planet2 = sphere(pos=(-5,-5,-5),material=materials.earth)
+
+        
 
     def SetCheckBox(self):
         # Set checkbox to ask if user wants labels in run
