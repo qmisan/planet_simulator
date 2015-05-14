@@ -104,13 +104,13 @@ class Simulation(object):
 
         for element in self.space.element_list:
             element.visual = sphere(pos=element.position, make_trail=True, radius=1)
-            if self.win.labels:
-                element.visual.label = label(pos=element.visual.pos,
-                                             text=str(element), xoffset=20,
-                                             yoffset=12,
-                                             space=element.visual.radius,
-                                             height=10, border=6,
-                                             font='sans')
+
+            element.visual.label = label(pos=element.visual.pos,
+                                         text=str(element), xoffset=20,
+                                         yoffset=12,
+                                         space=element.visual.radius,
+                                         height=10, border=6,
+                                         font='sans')
 
             if element.type == "Planet":
                 # Earth has unique texture material
@@ -168,7 +168,6 @@ class Simulation(object):
         for element in self.space.element_list:
             element.visual.pos = element.position
 
-            # If options define to show.win.settings["labels"]
-            if self.win.labels:
-                element.visual.label.pos = element.visual.pos
-                element.visual.label.text = str(element)
+            # Always update labels too (can hide)
+            element.visual.label.pos = element.visual.pos
+            element.visual.label.text = str(element)

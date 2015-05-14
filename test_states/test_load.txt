@@ -3,10 +3,6 @@
 # Tyyppi label position(muodossa: x,y,z) velocity(x,y,z) mass color
 #
 # Planet1
-Star Aurinko 0,0,0 0,0,0 2e10
+Planet Giant -1e11,0,0 0,0,-1e4 2e30 red
 # Planet2
-Planet Earth 0,5,0 1,0,0 100
-# Planet3
-Planet Bemu 0,-5,0 -1,0,0 100 orange
-# Planet4
-# Planet kolmas 0,0,20 0,1,0 10 cyan
+Planet Dwarf 1.5e11,0,0 0,0,1e4 1e30 blue

@@ -20,7 +20,6 @@ class MainWindow(window):
     simulation = None
 
     # Flags
-    labels = True
     toolbarheight = 10
     state_saved = False
     scene = None
@@ -268,6 +267,8 @@ class MainWindow(window):
         text(text='Welcome to planet simulator!',
              align='center', depth=-0.3, color=color.green)
         planet1 = sphere(pos=(5,-5,-5))
+        planet1.material = materials.emissive
+        planet1.color = color.yellow
         planet2 = sphere(pos=(-5,-5,-5),material=materials.earth)
 
         
@@ -283,10 +284,12 @@ class MainWindow(window):
     def ShowOrHideLabels(self, event):
         sender = event.GetEventObject()
         isChecked = sender.GetValue()
-        if isChecked:
-            self.labels = True
-        else:
-            self.labels = False
-
         if not self.simulation == None:
-                self.simulation.make_visuals()
+            if isChecked:
+                self.labels = True
+                for element in self.simulation.space.element_list:
+                    element.visual.label.visible = True
+            else:
+                self.labels = False
+                for element in self.simulation.space.element_list:
+                        element.visual.label.visible = False
