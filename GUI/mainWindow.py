@@ -17,14 +17,21 @@ class MainWindow(window):
     ID_RUN_BUTTON = wx.NewId()
     ID_PAUSE_BUTTON = wx.NewId()
     ID_TOOLBAR = wx.NewId()
+    screen_size = wx.GetDisplaySize()
+
+    # Simulation
     simulation = None
+    simulation_speed = 0
+    simulation_timestep = 0
+    frequency = 0
 
     # Flags
     toolbarheight = 10
     state_saved = False
     scene = None
-    screen_size = wx.GetDisplaySize()
-    
+    simulation_stopped = False
+
+
     def __init__(self, title):
 
         # Frame initialization
@@ -33,8 +40,10 @@ class MainWindow(window):
         # print(local_display_size)
         # Initialize mainwindow
         window.__init__(self, title="Planet Simulator", _make_panel=True, width = self.screen_size[0],
-                        height = self.screen_size[1] ) # kw _make_panel=False 
+                        height = self.screen_size[1] ) # kw _make_panel=False
 
+        # Set icon
+        self.win.SetIcon(wx.Icon('planet.ico', wx.BITMAP_TYPE_ICO))
         # Makes program constant fullscreen
         self.fullscreen = True
 
@@ -43,7 +52,6 @@ class MainWindow(window):
         self.SetDisplay()
         self.SetStart()
         self.SetCheckBox()
-
     def SetMenubar(self):
 
         #File menu for basic menu functionality
@@ -69,9 +77,9 @@ class MainWindow(window):
         menuItem = helpmenu.Append(wx.ID_ABOUT, "&About",
                                    "Information about this program")
         self.win.Bind(wx.EVT_MENU, self.OnAbout, menuItem)
-        
+
         # NOTE: Implement other wx.Menu instances here
-        
+
         # Creating the menubar.
         menuBar = wx.MenuBar()
         # Adding menus
@@ -96,12 +104,17 @@ class MainWindow(window):
                                        'Run Simulation',
                                        wx.Bitmap('GUI/run_button.png'))
         self.win.Bind(wx.EVT_TOOL, self.OnRun, runTool)
- 
+
         # Creating 'Pause' button to toolbar
         pauseTool = toolbar.AddLabelTool(wx.ID_ANY,
                                               'Pause Simulation',
                                               wx.Bitmap('GUI/pause_button.png'))
         self.win.Bind(wx.EVT_TOOL, self.OnPause, pauseTool)
+
+        # labelTool = toolbar.AddCheckTool(wx.ID_ANY,
+        #                                  'Labels on simulation')
+
+        # self.win.Bind(wx.EVT_CHECKBOX, self.ShowOrHideLabels)
 
         toolbar.Realize()  # IDIOT U FORGOT TO SHOW IT!!!!!
 
@@ -136,6 +149,7 @@ class MainWindow(window):
             self.simulation = Simulation(self)
             self.simulation.load(os.path.join(self.dirname, self.filename))
             self.simulation.space.print_elements()
+            self.SetDataPanel()
 
             # Makes display for visualization
             # TODO: Need to dock display to mainWindow
@@ -144,11 +158,12 @@ class MainWindow(window):
             # Make visuals to all elements and add them rendering space
             # self.simulation.make_visuals()
             # self.simulation.render()
-            # rate = 
+            # rate =
         self.state_saved = True
+        self.simulation_stopped = False
         dlg.Destroy()
-        while(1):
-            rate(100)
+
+
 
     def OnSaveAs(self, event):
 
@@ -205,58 +220,65 @@ class MainWindow(window):
         to ask user simulation run parameters
         @para
         """
-        simulation_speed = 0
-        simulation_timestep = 0
 
-        if self.simulation == None:
-            dlg5 = wx.MessageDialog(self.win,
-                                   "No loaded simulation state present!",
-                                    "Error running simulation!",
-                                    wx.OK)
-            dlg5.ShowModal()
-            dlg5.Destroy()
-            return
+        if not self.simulation_stopped == True:
+            self.simulation_speed = 0
+            self.simulation_timestep = 0
 
-        # Asking simulation speed
-        dlg = wx.TextEntryDialog(None,
-                                 "Set simulation speed (seconds/real second)",
-                                 "Run")
-        dlg.SetValue("100")
+            if self.simulation == None:
+                dlg5 = wx.MessageDialog(self.win,
+                                       "No loaded simulation state present!",
+                                        "Error running simulation!",
+                                        wx.OK)
+                dlg5.ShowModal()
+                dlg5.Destroy()
+                return
 
-        if dlg.ShowModal() == wx.ID_OK:
-            simulation_speed = int(dlg.GetValue())
-            if not isinstance(simulation_speed, int):
-                pass
-                # raise WrongSimulationParameterError("")
+            # Asking simulation speed
+            dlg = wx.TextEntryDialog(None,
+                                     "Set simulation speed (seconds/real second)",
+                                     "Run")
+            dlg.SetValue("100")
 
-        # Asking simulation speed
-        dlg2 = wx.TextEntryDialog(None, "Set timestep (seconds)", "Run")
-        dlg2.SetValue("1")
+            if dlg.ShowModal() == wx.ID_OK:
+                self.simulation_speed = int(dlg.GetValue())
+                if not isinstance(self.simulation_speed, int):
+                    pass
+                    # raise WrongSimulationParameterError("")
 
-        if dlg2.ShowModal() == wx.ID_OK:
-            simulation_timestep = int(dlg2.GetValue())
-            if not isinstance(simulation_timestep, int):
-                pass
-                # raise WrongSimulationParameterError("")
+            # Asking simulation speed
+            dlg2 = wx.TextEntryDialog(None, "Set timestep (seconds)", "Run")
+            dlg2.SetValue("1")
 
-        # Asking rendering frequency
-        dlg3 = wx.TextEntryDialog(None, "Set rendering frequency", "Run")
-        dlg3.SetValue("2")
+            if dlg2.ShowModal() == wx.ID_OK:
+                self.simulation_timestep = int(dlg2.GetValue())
+                if not isinstance(self.simulation_timestep, int):
+                    pass
+                    # raise WrongSimulationParameterError("")
 
-        if dlg3.ShowModal() == wx.ID_OK:
-            frequency = int(dlg3.GetValue())
-            if not isinstance(frequency, int):
-                pass
-                # raise WrongSimulationParameterError("")
+            # Asking rendering frequency
+            dlg3 = wx.TextEntryDialog(None, "Set rendering frequency", "Run")
+            dlg3.SetValue("2")
 
-        self.simulation.run(simulation_speed, simulation_timestep, frequency)
+            if dlg3.ShowModal() == wx.ID_OK:
+                self.frequency = int(dlg3.GetValue())
+                if not isinstance(self.frequency, int):
+                    pass
+                    # raise WrongSimulationParameterError("")
+
+            self.simulation.run(self.simulation_speed, self.simulation_timestep, self.frequency)
+
+        # If simulation is only stopped
+        else:
+            self.simulation.run(self.simulation_speed, self.simulation_timestep, self.frequency)
 
     def OnPause(self, event):
         self.simulation.stop()
 
+
     def SetDisplay(self):
         # Display
-        self.scene = display(window=self, width=0.8*self.screen_size[0], 
+        self.scene = display(window=self, width=0.8*self.screen_size[0],
                              height = 0.8*self.screen_size[1], autoscale=True)
 
     def SetStart(self):
@@ -271,14 +293,14 @@ class MainWindow(window):
         planet1.color = color.yellow
         planet2 = sphere(pos=(-5,-5,-5),material=materials.earth)
 
-        
+
 
     def SetCheckBox(self):
         # Set checkbox to ask if user wants labels in run
         print(self.screen_size)
         cb = wx.CheckBox(self.panel, label="Labels", pos=(200,int(self.screen_size[1]*0.83)))
 
-        cb.SetValue(True)
+
         cb.Bind(wx.EVT_CHECKBOX, self.ShowOrHideLabels)
 
     def ShowOrHideLabels(self, event):
@@ -293,3 +315,18 @@ class MainWindow(window):
                 self.labels = False
                 for element in self.simulation.space.element_list:
                         element.visual.label.visible = False
+
+    def SetDataPanel(self):
+        datapanel = wx.Panel(self.win,
+                             pos=(0.85*int(self.screen_size[0]),0),
+                             size=(200,int(self.screen_size[1]*0.5)))
+        sizer = wx.BoxSizer(wx.VERTICAL)
+
+        for element in self.simulation.space.element_list:
+            print("Trying to add:"+str(element))
+            button = wx.Button(datapanel,-1,label=str(element))
+            sizer.Add(button, wx.EXPAND|wx.ALL)
+            button.Bind(wx.EVT_BUTTON, self.simulation.center)
+
+        datapanel.SetSizer(sizer)
+        datapanel.Fit()

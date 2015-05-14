@@ -12,7 +12,6 @@ class Simulation(object):
     It also runs physics part forward in time.
     """
     # Flags
-    running = False
     cam_follow = False
 
     def __init__(self, window):
@@ -128,7 +127,10 @@ class Simulation(object):
                 element.visual.radius = 2
 
     def center(self,element):
-        scene.center(element)
+        """
+        NOTE: DUMMY
+        """
+        pass
 
 
     def run(self, speed, timestep, frequency, **kwargs):
@@ -139,7 +141,7 @@ class Simulation(object):
         @param frequency: How many many times visual models updated per speed
         (seconds/real second)
         """
-        self.running = True
+        self.win.simulation_stopped = False
         i = 0
 
         while(1):
@@ -155,10 +157,12 @@ class Simulation(object):
                 i = 0
 
     def stop(self):
-        if self.running == True:
-            self.running = False
-        while(True):
-            rate(1)
+        if self.win.simulation_stopped == True:
+            pass
+        else:
+            self.win.simulation_stopped = True
+            while(True):
+                rate(10)
 
     def render(self):
         """
