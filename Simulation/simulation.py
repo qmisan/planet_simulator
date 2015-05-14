@@ -130,6 +130,7 @@ class Simulation(object):
         """
         NOTE: DUMMY
         """
+        print("I come here with "+element.label)
         pass
 
 

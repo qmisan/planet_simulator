@@ -19,6 +19,8 @@ class Space(object):
                 if not (other.position == element.position):
                     g = gravity(element, other)
                     element.acceleration = element.acceleration + g/element.mass
+                    if collision(element,other):
+                        print("COLLIDEDDDD!!!")
             element.next_pos = element.position + element.velocity*time+0.5*element.acceleration*(time**2)
             element.next_vel = element.next_vel + element.acceleration*time
 

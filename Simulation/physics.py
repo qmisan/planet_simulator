@@ -32,3 +32,10 @@ def unit_vector(vector):
     Makes unit vector with same direction as param
     """
     return vector/mag(vector)
+
+def collision(element1,element2):
+    dist = distance(element1.position,element2.position)
+    if dist<=element1.visual.radius+element2.visual.radius:
+        return True
+    else:
+        return False

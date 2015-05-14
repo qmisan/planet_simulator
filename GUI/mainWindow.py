@@ -31,6 +31,8 @@ class MainWindow(window):
     scene = None
     simulation_stopped = False
 
+    # Datapanel
+    datapanel = None
 
     def __init__(self, title):
 
@@ -162,8 +164,8 @@ class MainWindow(window):
         self.state_saved = True
         self.simulation_stopped = False
         dlg.Destroy()
-
-
+        while(True):
+            rate(100)
 
     def OnSaveAs(self, event):
 
@@ -273,7 +275,10 @@ class MainWindow(window):
             self.simulation.run(self.simulation_speed, self.simulation_timestep, self.frequency)
 
     def OnPause(self, event):
-        self.simulation.stop()
+        if self.simulation == None or self.simulation_stopped == True:
+            pass
+        else:
+            self.simulation.stop()
 
 
     def SetDisplay(self):
@@ -293,10 +298,13 @@ class MainWindow(window):
         planet1.color = color.yellow
         planet2 = sphere(pos=(-5,-5,-5),material=materials.earth)
 
+    def OnCenter(self, event, element):
+        self.simulation.center(element)
 
 
     def SetCheckBox(self):
         # Set checkbox to ask if user wants labels in run
+        # NOTE: This could be in toolbar
         print(self.screen_size)
         cb = wx.CheckBox(self.panel, label="Labels", pos=(200,int(self.screen_size[1]*0.83)))
 
@@ -317,16 +325,38 @@ class MainWindow(window):
                         element.visual.label.visible = False
 
     def SetDataPanel(self):
-        datapanel = wx.Panel(self.win,
-                             pos=(0.85*int(self.screen_size[0]),0),
-                             size=(200,int(self.screen_size[1]*0.5)))
+        # Delete old
+        if not self.datapanel == None:
+            self.datapanel.Destroy()
+            self.datapanel = None
+
+        self.datapanel = wx.Panel(self.win,
+                                  pos=(0.8*int(self.screen_size[0]),0),
+                                  size=(0.2*self.screen_size[0],
+                                  0.8*self.screen_size[1]))
+
+        self.datapanel.SetBackgroundColour("RED")
         sizer = wx.BoxSizer(wx.VERTICAL)
+        box = wx.StaticBox(self.datapanel,label="self.Datapanel",pos=(5,5),size=(240,0))
+        st = wx.StaticText(self.datapanel,label="Information about elements in space\n(Press element to center it on scene)")
 
+        L = 100
+
+        i = 0
         for element in self.simulation.space.element_list:
-            print("Trying to add:"+str(element))
-            button = wx.Button(datapanel,-1,label=str(element))
-            sizer.Add(button, wx.EXPAND|wx.ALL)
-            button.Bind(wx.EVT_BUTTON, self.simulation.center)
+            button = wx.Button(self.datapanel,-1,label=element.label+"\nMass: "+str(element.mass),
+                                pos = (0,i*100+L))
+            # sizer.Add(button, wx.EXPAND|wx.ALL)
+            def OnButton(self, event, center_element=element):
+                print("U pressed:"+element.label)
+                self.simulation.center(element)
 
-        datapanel.SetSizer(sizer)
-        datapanel.Fit()
+            button.Bind(wx.EVT_BUTTON, OnButton)
+
+            i = i+1
+        box.size = (240,i*100+L+20)
+        # self.datapanel.SetSizer(sizer)
+        # self.datapanel.Fit()
+        self.datapanel.Show()
+
+
