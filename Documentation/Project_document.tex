@@ -1,0 +1,164 @@
+%------------------------------------------------------------------------------
+%----------LaTex-pohja S--72.1110 Signaalit ja järjestelmät kurssille----------
+%-----------------------Laatinut Atte Yrjölä 17.10.2013------------------------
+%------------------------------------------------------------------------------
+
+\documentclass[a4paper, 12pt, finnish]{report} %dokumenttiluokka ja sille muutamia määrityksiä
+\usepackage[latin1]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[finnish]{babel} %suomenkieli
+\usepackage{amsmath} %matematiikka kirjasto
+\usepackage{graphicx} %kuvien liittämiseen kuten etusivun Aalto-logo
+\usepackage{hyperref}
+%\usepackage{pgfplots} %kuvaajien piirtämiseen, ota kommentointi pois mikäli haluat käyttää
+
+\pagestyle{empty} %ei numeroita sivulle, mikäli niitä silti ilmestyy niin käytä komentoa \thispagestyle{empty} näillä sivuilla. Ei meinaa jostain syystä toimia report luokan kanssa
+\setlength{\parindent}{0mm} %ei sisennystä uusiin kappaleisiin
+\setlength{\emergencystretch}{15pt} %tekstin muokkaamiseen eli sallii välien venytyksen riveillä jotta näyttää paremmalta
+\newcommand*{\findate}{\the\day.\the\month.\the\year} %uusi komento päivämäärän esittämiseen suomalaisittain
+\newcommand*{\sijoitus}[2]{\mathop{\Big/}\limits_{\mspace{-19mu}#1}^{\mspace{19mu}#2}} % uusi komento jolla saadaan itgeraaliin suomalainen sijoitus viiva, käytetään \sijoitus{yläraja}{alaraja}, vaatii amsmath kirjaston
+
+%ohjeita LaTeXin käyttöön löytyy hyvin esimerkiksi sivulta http://www.uta.fi/sis/mtt/latex/index.html
+
+\begin{document} %dokumentin aloitus
+
+\begin{titlepage}
+%Kansisivun muotoilu
+	\begin{flushleft}
+	\includegraphics[scale = 0.5]{aaltologo}
+	\end{flushleft}
+  \centering
+  \vspace*{11\baselineskip}
+  \large
+  \bfseries
+  CSE-A1121 Ohjelmoinnin peruskurssi Y2 \\
+	[5\baselineskip]
+  \normalfont
+  \small
+  Planeetta simulaattori \\ %vaihda tähän työn numero
+	Projektidokumentti \\ %jälkiselostus/esiselostus
+	\vspace*{8\baselineskip}
+
+
+	\hspace*{180pt}
+	\makebox[30pt][l]{Henri Merilä 356194} \\ %tekijä 1
+	\hspace*{180pt}
+	\makebox[30pt][l]{Sähkötekniikan koulutusohjelma} \\ %tekijä 2
+	\hspace*{180pt}
+	\makebox[30pt][l]{3. vuosikurssi} \\ %tekijä 2
+	\hspace*{180pt} 
+	\makebox[30pt][l]{Assari: Petri Leskinen } \\ %tekijä 2
+	[1\baselineskip]
+	\hspace*{180pt}
+	 \\ %assistentti
+	[1\baselineskip]
+	\hspace*{180pt}
+	\makebox[30pt][l]{Dokumentti laadittu: 15.5.2015} \\ %selostuksen laatimis päivä
+
+\end{titlepage}
+
+%\tableofcontents %ota kommentointi pois mikäli haluat että LaTeX muodostaa automaattisen sisällysluettelon
+
+%itse dokumentti osio alkaa tästä
+%alla muutamia vaiheita miten dokumenttia voi alkaa rakentamaan
+%matemaattisen kaavojen kirjoittamisesta saa lisää opastusta internetistä
+
+\section*{Yleistä}
+		Loin projektityönäni planeetta-simulaattorin. Simulaattorilla pystyy lukemaan tekstitiedostosta planeettojen sijainnit simulointiavaruudessa, massat,  nopeudet ja värin. Simulaationtilanteen lukemisen jälkeen 
+simulaattorilla pystyy simuloimaan planeettojen liikettä avaruudessa kun aika kuluu eteenpäin. Ajan nopeutta pystyy säätämään, kuin myös laskennallista aikahyppyä ja piirtotaajuutta. Simulaattori piirtää 3D-mallinnuksen tilanteesta ja kykenee katsomaan tilannetta erilaisista näkökulmista. Tilanteen pystyy myös tallentamaan teksitiedostoon.\\
+\linebreak{}		
+\includegraphics[scale = 0.2]{simu1}		
+\linebreak{}
+Toteutus seuraa suurimmilta osin suunnitelmaa, mutta lisäominaisuuksia on jäänyt liuta pois johtuen ajankäytöllisistä syistä. 3D-visualisointi kirjasjon yhteensopivuusongelmat käyttöliittymäkirjastojen kanssa veivät suuren osan projektin toteutusajasta. Projekti on kokonaisuudessaan ollut vaativa, mutta suunnitelma huomioon ottaen mielestäni sen onnistuminen on vain tyydyttävä.
+
+\pagebreak
+								
+\section*{Käyttöohje}
+\subsection*{Kirjasto ja käynnistys}
+Ohjelma vaatii toimiakseen VPython moduulin ja Pythonista version 2.7. Molemmat näistä voi ladata suoraan osoitteesta  \url{ http://www.vpython.org/contents/download_windows.html}.
+Kun nämä on asennettu voi ohjelman ajaa suoraan tuplaklikkaamalla `run.bat' tiedostoa ohjelman juurikansiossa. Klikkaamalla `test-run.bat' ohjelma käynnistyy käytyään yksikkötestit läpi.
+ \linebreak{}		
+\includegraphics[scale = 0.75]{simu2}
+
+%\pagebreak		
+
+\subsection*{Valikko}
+Yläreunasta avautuvasta `File'-valikosta löytyy ohjelman kannalta keskeiset tiedostosta lataamis(\emph{Open}) ja tiedostoon kirjoittamis(\emph{Save as}) toiminnallisuudet. Lisäksi valikosta löytyy \emph{Exit} jolla voi poistua ohjelmasta. 
+\linebreak{}		
+\includegraphics[scale = 0.75]{simu3}
+\linebreak{}
+ Sekä `Open' että `Save as' valikkonäppäimiä käyttäessä avautuu tiedostodialogi-ikkuna, josta tiedostosijainnit on kätevä osoittaa.\\
+\includegraphics[scale = 0.3]{simu5}
+ \pagebreak
+
+\subsection*{Työkalut}
+Työkalupalkista löytyvät \emph{Run}  ja \emph{Pause} näppäimet. Kun simulaatiotilanne on ladattu, run näppäimellä simulaatio lähtee käyntiin, kun taas pause näppäin pysäyttää simulaation ajamisen. Pysäytetyn simulaatio-tilanteen voi tallentaa valikon save-näppäimellä\\		
+\includegraphics[scale = 0.75]{simu4}
+
+%Seuraava kuva on simu6
+
+\subsection*{Visualisointi-paneeli}															
+Visualisointi ikkuna on koko simulaation sydän. Sitä voi hallita hiirellä seuraavilla komennoilla.
+
+\begin{itemize}
+\item Hiiren oikea näppäin pohjaan painettuna - Ohjaa kamerakulmaa
+\item Hiiren rulla näppäin pohjaan painettuna - Ohjaa lähennystä (Eteen taakse)
+\end{itemize}
+\includegraphics[scale = 0.3]{simu6}
+\\																
+Lisäksi visualisointi paneelin alla on labels-checkbox, jolla visualisoinnista voi halutessaan poistaa elementtien merkkilaatat.
+
+\pagebreak
+
+\subsection*{Tietopaneeli}
+Tietopaneelissa on tiedot simulaation kaikista elementeistä. Tietopaneelista tietyn elementin nappia painamalla kamera seuraa painettua elementtiä.
+% Kuva
+
+\section*{Ohjelman rakenne}
+Ohjelma koostuu main- functiosta ja kahdesta eri moduulista - Simulation ja GUI.
+
+
+\subsection*{Simulation}
+Simulation-moduuli sisältää ohjelman simulointi-osuuden - avaruuden sen kappaleet ja niiden visualisointi. Simulointi sisältää myös fysiikka-laskuihin tarvittavat funktiot sekä simulaation parsimisen tiedostosta.
+\\
+\includegraphics[scale = 0.5]{simu7}
+
+\subsection*{GUI}
+GUI-moduuli sisältää ohjelman käyttöliittymään liittyvät osat. GUI-moduuli käyttää kutsuu simulaatiota.
+\\
+\includegraphics[scale = 0.5]{simu8}
+
+\pagebreak
+
+
+\section*{Algoritmit ja tietorakenteet}
+Ohjelmassa käytetään muutamaa fysiikan kaavaa laskemaan kappaleiden välisiä voimia ja uusia sijainteja. Laskut ovat pääosin vektori muotoisia johtuen 3-ulotteisesta avaruudesta.\\
+
+\begin{itemize}
+\item[Gravitaatiolaki]
+\[\bar{F}=G\frac{m_1m_2}{d^2}\]
+\item[Kiihtyvyys]
+\[\bar{F}=m\bar{a}\]
+\\
+Lisäksi
+
+\end{itemize}
+
+\section*{Tiedostot}
+
+\section*{Testaus}
+
+\section*{Ohjelman tunnetut puutteet ja viat}
+% Tähän myös 3 parasta ja heikointa kohtaa
+
+\section*{Poikkeamat suunnitelmasta}
+
+\section*{Aikataulu}
+
+\section*{Yhteenveto}
+
+\section*{Viitteet}
+
+																																				
+%dokumentti lopetetaan
+\end{document}

@@ -127,7 +127,7 @@ class MainWindow(window):
         """Show about dialog box"""
         # A message dialog box with an OK button.
         # wx.OK is a standard ID in wxWidgets.
-        dlg = wx.MessageDialog(self.win, "Planet simulator version 1.0",
+        dlg = wx.MessageDialog(self.win, "Planet simulator version 1.0\nFor more documentation read Documentation\Project_document.pdf ",
                                "About Planet simulator", wx.OK)
         dlg.ShowModal()  # Show it
         dlg.Destroy()  # finally destroy it when finished.
@@ -335,7 +335,7 @@ class MainWindow(window):
                                   size=(0.2*self.screen_size[0],
                                   0.8*self.screen_size[1]))
 
-        self.datapanel.SetBackgroundColour("RED")
+        # self.datapanel.SetBackgroundColour("RED")
         sizer = wx.BoxSizer(wx.VERTICAL)
         box = wx.StaticBox(self.datapanel,label="self.Datapanel",pos=(5,5),size=(240,0))
         st = wx.StaticText(self.datapanel,label="Information about elements in space\n(Press element to center it on scene)")
@@ -359,4 +359,30 @@ class MainWindow(window):
         # self.datapanel.Fit()
         self.datapanel.Show()
 
+
+        # ----------------------------------------------
+        # NOTE: Alternative way to do datapanel -> by using createtoolbar in wx.frame
+        #
+            # Init toolbar
+        # databar = self.win.CreateToolBar(style=TB_RIGHT)
+        # toolbar.SetToolBitmapSize((20, self.toolbarheight))  # Button size in pixels?
+        # # qtool = toolbar.AddLabelTool(wx.ID_ANY,'Quit',wx.Bitmap('run_button.png'))
+        # # Creating 'RUN' button to toolbar
+        # runTool = toolbar.AddLabelTool(wx.ID_ANY,
+        #                                'Run Simulation',
+        #                                wx.Bitmap('GUI/run_button.png'))
+        # self.win.Bind(wx.EVT_TOOL, self.OnRun, runTool)
+
+        # # Creating 'Pause' button to toolbar
+        # pauseTool = toolbar.AddLabelTool(wx.ID_ANY,
+        #                                       'Pause Simulation',
+        #                                       wx.Bitmap('GUI/pause_button.png'))
+        # self.win.Bind(wx.EVT_TOOL, self.OnPause, pauseTool)
+
+        # # labelTool = toolbar.AddCheckTool(wx.ID_ANY,
+        # #                                  'Labels on simulation')
+
+        # # self.win.Bind(wx.EVT_CHECKBOX, self.ShowOrHideLabels)
+
+        # toolbar.Realize()  # IDIOT U FORGOT TO SHOW IT!!!!!
 
