@@ -34,6 +34,8 @@ class MainWindow(window):
     statusbar = None
     button_list = None
 
+    following = None
+
     def __init__(self, title, debug=False):
         self.debug_mode = debug
         if self.debug_mode:
@@ -350,7 +352,7 @@ class MainWindow(window):
 
     def Center(self, element):
         self.UpdateStatusbar(element.label)
-        self.simulation.center(element)
+        self.scene.center = self.following.visual.pos
 
     def UpdateStatusbar(self, label):
         if self.debug_mode:
@@ -418,5 +420,6 @@ class MainWindow(window):
 
         if self.debug_mode:
             print("User pressed: "+element.label+" centering")
+        self.following = element
         self.Center(element)
         # ----------------------------------------------

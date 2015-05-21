@@ -13,7 +13,6 @@ class Simulation(object):
     It also runs physics part forward in time.
     """
     # Flags
-    cam_follow = False
     debug_mode = False
     collided = False
 
@@ -173,15 +172,6 @@ class Simulation(object):
             # Stars have unique ability: Emitting light
             # In addition they have increased radius compared to other objects
 
-
-    def center(self,element):
-        """
-        NOTE: DUMMY
-        """
-        if self.win.debug_mode:
-            print("Simulation changing center")
-        self.win.scene.center=element.visual.pos
-
     def run(self, speed, timestep, frequency, **kwargs):
         """
         Runs simulation forward from current state with current parameters
@@ -229,3 +219,6 @@ class Simulation(object):
             # Always update labels too (can hide)
             element.visual.label.pos = element.visual.pos
             element.visual.label.text = str(element)
+
+        if not self.win.following==None:
+            self.win.scene.center = self.win.following.visual.pos
