@@ -15,15 +15,19 @@ class Simulation(object):
     # Flags
     cam_follow = False
     debug_mode = False
+    collided = False
+
     def __init__(self, window):
-        self.space = Space()
+        self.space = Space(self)
         self.win = window
+
     def load(self, file):  # NOTE: DONE Parsing state from file
         """
         Parses simulation state out of file
         """
         if self.win.debug_mode:
             print("Loading file...")
+        self.collided = False
         with open(file) as f:
             data = f.readlines()
             for line in data:
@@ -176,9 +180,7 @@ class Simulation(object):
         """
         if self.win.debug_mode:
             print("Simulation changing center")
-            print("I come here with "+element.label)
-        pass
-
+        self.win.scene.center=element.visual.pos
 
     def run(self, speed, timestep, frequency, **kwargs):
         """
@@ -192,6 +194,7 @@ class Simulation(object):
             print("Simulation running")
         self.win.simulation_stopped = False
         i = 0
+
 
         while(1):
             rate(speed)

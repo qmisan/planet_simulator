@@ -3,8 +3,6 @@ import os  # To get path for "Open file"
 from visual import *
 from toolbarPanel import ToolbarPanel
 from Simulation.simulation import Simulation
-# from Simulation.simulation import Simulation
-# from Visualization.view import View
 
 
 class MainWindow(window):
@@ -30,15 +28,17 @@ class MainWindow(window):
     state_saved = False
     scene = None
     simulation_stopped = False
-    debug_mode=False
+    debug_mode = False
 
     # Datapanel
-    datapanel = None
+    statusbar = None
+    button_list = None
 
     def __init__(self, title, debug=False):
         self.debug_mode = debug
         if self.debug_mode:
             print("Initializing main window...")
+            print("Local screen size is "+str(self.screen_size))
         # Frame initialization
         # Get local display size NOTE: Local display size not needed if always fullscreen
         # local_display_size = wx.GetDisplaySize()
@@ -54,6 +54,7 @@ class MainWindow(window):
 
         self.SetMenubar()
         self.SetToolbar()
+        self.SetStatusbar()
         self.SetDisplay()
         self.SetStart()
         self.SetCheckBox()
@@ -102,6 +103,7 @@ class MainWindow(window):
         self.win.SetMenuBar(menuBar)  # Adding menuBar to frame
         if self.debug_mode:
             print("...done!")
+
     def SetToolbar(self):
         if self.debug_mode:
             print("Setting toolbar...")
@@ -129,8 +131,12 @@ class MainWindow(window):
         toolbar.Realize()  # IDIOT U FORGOT TO SHOW IT!!!!!
         if self.debug_mode:
             print("...done!")
+
     def SetStatusbar(self):
-        pass
+        if self.debug_mode:
+            print("Setting statusbar")
+        self.statusbar = self.win.CreateStatusBar()
+        self.statusbar.SetStatusText("Centered (0,0,0)")
 
     def OnAbout(self, event):
         """Show about dialog box"""
@@ -253,6 +259,15 @@ class MainWindow(window):
                 dlg5.Destroy()
                 return
 
+            if self.simulation.collided == True:
+                dlg = wx.MessageDialog(self.win,
+                                       "Collision detected, can't continue simulation",
+                                        "Error running simulation!",
+                                        wx.OK)
+                dlg.ShowModal()
+                dlg.Destroy()
+                return
+
             # Asking simulation speed
             dlg = wx.TextEntryDialog(None,
                                      "Set simulation speed (seconds/real second)",
@@ -320,6 +335,7 @@ class MainWindow(window):
                              height = 0.8*self.screen_size[1], autoscale=True)
         if self.debug_mode:
             print("...done!")
+
     def SetStart(self):
         # Backgroundcolor to white
         # self.scene.background(color.white)
@@ -332,90 +348,75 @@ class MainWindow(window):
         planet1.color = color.yellow
         planet2 = sphere(pos=(-5,-5,-5),material=materials.earth)
 
-    def OnCenter(self, event, element):
+    def Center(self, element):
+        self.UpdateStatusbar(element.label)
         self.simulation.center(element)
 
+    def UpdateStatusbar(self, label):
+        if self.debug_mode:
+            print("Updating statusbar text")
+        self.statusbar.SetStatusText("Centered to " + label)
 
     def SetCheckBox(self):
         # Set checkbox to ask if user wants labels in run
         # NOTE: This could be in toolbar
-        print(self.screen_size)
-        cb = wx.CheckBox(self.panel, label="Labels", pos=(200,int(self.screen_size[1]*0.83)))
+        if self.debug_mode:
+            print("Setting labels checkbox...")
+        L = 0.8*int(self.screen_size[0])
+        cb = wx.CheckBox(self.panel, label="Labels", pos=(L+0.05*L+5,50))
         cb.Bind(wx.EVT_CHECKBOX, self.ShowOrHideLabels)
         cb.SetValue(True)
+        if self.debug_mode:
+            print("...done!")
+
     def ShowOrHideLabels(self, event):
         sender = event.GetEventObject()
         isChecked = sender.GetValue()
         if not self.simulation == None:
             if isChecked:
+                if self.debug_mode:
+                    print("User checked labels checkbox")
                 self.labels = True
                 for element in self.simulation.space.element_list:
                     element.visual.label.visible = True
             else:
+                if self.debug_mode:
+                    print("User unchecked labels checkbox")
                 self.labels = False
                 for element in self.simulation.space.element_list:
                         element.visual.label.visible = False
 
     def SetDataPanel(self):
-        # Delete old
-        if not self.datapanel == None:
-            self.datapanel.Destroy()
-            self.datapanel = None
 
-        self.datapanel = wx.Panel(self.win,
-                                  pos=(0.8*int(self.screen_size[0]),0),
-                                  size=(0.2*self.screen_size[0],
-                                  0.8*self.screen_size[1]))
+        if self.debug_mode:
+            print("Setting cameracontrol buttons...")
 
-        # self.datapanel.SetBackgroundColour("RED")
-        sizer = wx.BoxSizer(wx.VERTICAL)
-        box = wx.StaticBox(self.datapanel,label="self.Datapanel",pos=(5,5),size=(240,0))
-        st = wx.StaticText(self.datapanel,label="Information about elements in space\n(Press element to center it on scene)")
+        if not (self.button_list == None):
+            for button in self.button_list:
+                button.Destroy()
 
-        L = 100
+        L = 0.8*int(self.screen_size[0])
+
+        box = wx.StaticBox(self.panel,label="Vision control panel",pos=(L+0.05*L,0),size=(240,int(self.screen_size[1])*0.8))
+        # st = wx.StaticText(self.datapanel,label="Information about elements in space\n(Press element to center it on scene)")
+
+        D = 100
 
         i = 0
+
+        self.button_list = []
         for element in self.simulation.space.element_list:
-            button = wx.Button(self.datapanel,-1,label=element.label+"\nMass: "+str(element.mass),
-                                pos = (0,i*100+L))
-            # sizer.Add(button, wx.EXPAND|wx.ALL)
-            def OnButton(self, event, center_element=element):
-                if self.debug_mode:
-                    print("User pressed: "+element.label+" centering")
-                self.simulation.center(element)
-
-            button.Bind(wx.EVT_BUTTON, OnButton)
-
+            button = wx.Button(self.panel,-1, label=element.label+"\nMass: "+str(element.mass),
+                                pos = (L+0.05*L+5,i*100+D))
+            button.Bind(wx.EVT_BUTTON, lambda evt, celement=element: self.OnButton(evt, celement))
+            self.button_list.append(button)
             i = i+1
+
         box.size = (240,i*100+L+20)
-        # self.datapanel.SetSizer(sizer)
-        # self.datapanel.Fit()
-        self.datapanel.Show()
 
+    def OnButton(self, event, element):
 
+        if self.debug_mode:
+            print("User pressed: "+element.label+" centering")
+        self.Center(element)
         # ----------------------------------------------
-        # NOTE: Alternative way to do datapanel -> by using createtoolbar in wx.frame
-        #
-            # Init toolbar
-        # databar = self.win.CreateToolBar(style=TB_RIGHT)
-        # toolbar.SetToolBitmapSize((20, self.toolbarheight))  # Button size in pixels?
-        # # qtool = toolbar.AddLabelTool(wx.ID_ANY,'Quit',wx.Bitmap('run_button.png'))
-        # # Creating 'RUN' button to toolbar
-        # runTool = toolbar.AddLabelTool(wx.ID_ANY,
-        #                                'Run Simulation',
-        #                                wx.Bitmap('GUI/run_button.png'))
-        # self.win.Bind(wx.EVT_TOOL, self.OnRun, runTool)
-
-        # # Creating 'Pause' button to toolbar
-        # pauseTool = toolbar.AddLabelTool(wx.ID_ANY,
-        #                                       'Pause Simulation',
-        #                                       wx.Bitmap('GUI/pause_button.png'))
-        # self.win.Bind(wx.EVT_TOOL, self.OnPause, pauseTool)
-
-        # # labelTool = toolbar.AddCheckTool(wx.ID_ANY,
-        # #                                  'Labels on simulation')
-
-        # # self.win.Bind(wx.EVT_CHECKBOX, self.ShowOrHideLabels)
-
-        # toolbar.Realize()  # IDIOT U FORGOT TO SHOW IT!!!!!
-

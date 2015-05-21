@@ -5,10 +5,13 @@ class Space(object):
     """
     docstring for Space
     """
-    def __init__(self):
+    # Containers
+    simulation = None
+
+    def __init__(self, simulation):
         # Makes space object with given x,y,z size
         self.element_list = []
-
+        self.simulation = simulation
     def add_element(self, element):
         element.space = self
         self.element_list.append(element)
@@ -20,7 +23,10 @@ class Space(object):
                     g = gravity(element, other)
                     element.acceleration = element.acceleration + g/element.mass
                     if collision(element,other):
-                        print("COLLIDEDDDD!!!")
+                        if self.simulation.debug_mode:
+                            print("2 Elements collided simulation stopping")
+                        self.simulation.stop()
+                        self.simulation.collided=True
             element.next_pos = element.position + element.velocity*time+0.5*element.acceleration*(time**2)
             element.next_vel = element.next_vel + element.acceleration*time
 
