@@ -11,7 +11,7 @@ from physics import *
 
 
 
-simu = Simulation()
+simu = Simulation(None)
 
 star = Star("Aurinko", vector(0, 0, 0), vector(0, 0, 0), 5e10)
 simu.space.add_element(star)

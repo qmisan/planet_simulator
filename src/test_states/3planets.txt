@@ -1,0 +1,7 @@
+Star Aurinko 0,0,0 0,0,0 5e10
+Planet Earth 0,50,0 1,0,0 10 blue
+Planet Mars 0,-50,0 -1,0,0 10 red
+Planet kolmas 25,0,25 0,1,0 10 blue
+Planet neljas -25,0,-25 0,1,0 10 red
+#
+Star Giant -1000,0,0 0,0,0 5e12

@@ -2,6 +2,7 @@ from space import Space
 from Elements.element import Element
 from Elements.planet import Planet
 from Elements.star import Star
+from Elements.satellite import NaturalSatellite
 from visual import *
 
 
@@ -13,15 +14,16 @@ class Simulation(object):
     """
     # Flags
     cam_follow = False
-
+    debug_mode = False
     def __init__(self, window):
         self.space = Space()
         self.win = window
-
     def load(self, file):  # NOTE: DONE Parsing state from file
         """
         Parses simulation state out of file
         """
+        if self.win.debug_mode:
+            print("Loading file...")
         with open(file) as f:
             data = f.readlines()
             for line in data:
@@ -30,6 +32,8 @@ class Simulation(object):
 
                     # If type planet
                     if line_data[0].strip().lower() == "planet":
+                        if self.win.debug_mode:
+                            print("Loader found planet")
                         label = line_data[1]
                         vec = line_data[2].split(",")
                         position = vector(float(vec[0]), float(vec[1]),
@@ -38,13 +42,20 @@ class Simulation(object):
                         velocity = vector(float(vec[0]), float(vec[1]),
                                           float(vec[2]))
                         mass = float(line_data[4])
-                        line_data[5].strip("\n")
-                        clr = Element.colors[line_data[5]]
-                        new_element = Planet(label, position, velocity,
-                                             mass, clr)
+                        try:
+                            line_data[5].strip("\n")
+                            clr = Element.colors[line_data[5]]
+
+                            new_element = Planet(label, position, velocity,
+                                                 mass, clr)
+                        except IndexError:
+                            new_element = Planet(label, position, velocity, mass)
+
                         self.add(new_element)
 
                     elif line_data[0].strip().lower() == "star":
+                        if self.win.debug_mode:
+                            print("Loader found star")
                         label = line_data[1]
                         vec = line_data[2].split(",")
                         position = vector(float(vec[0]), float(vec[1]),
@@ -53,18 +64,46 @@ class Simulation(object):
                         velocity = vector(float(vec[0]), float(vec[1]),
                                           float(vec[2]))
                         mass = float(line_data[4])
-                        line_data[5].strip("\n")
+                        # try:
+                        #     line_data[5].strip("\n")
+                        #     clr = Element.colors[line_data[5]]
+                        #     new_element = Planet(label, position, velocity,
+                        #                          mass, clr)
+                        # except IndexError:
+                        #     new_element = Star(label, position, velocity, mass)
+
                         # clr = Element.colors[line_data[5]]
                         new_element = Star(label, position,
                                            velocity, mass)
                         self.add(new_element)
 
+                    # If type NaturalSatellite
+                    elif line_data[0].strip().lower() == "naturalsatellite":
+                        if self.win.debug_mode:
+                            print("Loader found naturalsatellite")
+                        label = line_data[1]
+                        vec = line_data[2].split(",")
+                        position = vector(float(vec[0]), float(vec[1]),
+                                          float(vec[2]))
+                        vec = line_data[3].split(",")
+                        velocity = vector(float(vec[0]), float(vec[1]),
+                                          float(vec[2]))
+                        mass = float(line_data[4])
+
+                        line_data[5].strip("\n")
+                        clr = Element.colors[line_data[5]]
+
+                        new_element = NaturalSatellite(label, position, velocity,
+                                             mass, clr)
+                        self.add(new_element)
                     # NOTE: Other types here
-        print("Loaded following elements to simulation state:")
-        self.space.print_elements()
+
+        if self.win.debug_mode:
+            print("Loaded following elements to simulation state:")
+            self.space.print_elements()
         f.close()
         self.make_visuals()
-        self.render()
+        # self.render()
 
     def save(self, file):  # NOTE: DONE Saving state into file
         """
@@ -87,6 +126,8 @@ class Simulation(object):
 
 
     def add(self, element):
+        if self.win.debug_mode:
+            print("Simulation adding element")
         self.space.add_element(element)
 
     def make_visuals(self):
@@ -94,6 +135,8 @@ class Simulation(object):
         Makes visual model for each element in space
         """
 
+        if self.win.debug_mode:
+            print("Making visuals")
         # If already frame old one needs to be destroyed
         if not self.win.scene == None:
             self.win.scene.delete()
@@ -102,7 +145,19 @@ class Simulation(object):
         self.win.SetDisplay()
 
         for element in self.space.element_list:
-            element.visual = sphere(pos=element.position, make_trail=True, radius=1)
+            if element.type == "Planet" and (element.label == "Earth" or element.label == "earth"):
+                if self.win.debug_mode:
+                    print("Visualizator found label earth")
+                element.visual = sphere(pos=element.position, make_trail=True, radius=element.radius,
+                                        material=materials.earth)
+
+            elif element.type == "Star":
+                element.visual = sphere(pos=element.position, make_trail=True, radius=element.radius,
+                                        color=element.color, material=materials.emissive)
+
+            else:
+                element.visual = sphere(pos=element.position, make_trail=True, radius=element.radius,
+                                        color=element.color)
 
             element.visual.label = label(pos=element.visual.pos,
                                          text=str(element), xoffset=20,
@@ -111,26 +166,17 @@ class Simulation(object):
                                          height=10, border=6,
                                          font='sans')
 
-            if element.type == "Planet":
-                # Earth has unique texture material
-                # Other than that its similar to planet objects
-                if element.label == "Earth":
-                    element.visual.material = materials.earth
-                else:
-                    element.visual.color = element.color
-
             # Stars have unique ability: Emitting light
             # In addition they have increased radius compared to other objects
-            if element.type == "Star":
-                element.visual.color = element.color
-                element.visual.material = materials.emissive
-                element.visual.radius = 2
+
 
     def center(self,element):
         """
         NOTE: DUMMY
         """
-        print("I come here with "+element.label)
+        if self.win.debug_mode:
+            print("Simulation changing center")
+            print("I come here with "+element.label)
         pass
 
 
@@ -142,6 +188,8 @@ class Simulation(object):
         @param frequency: How many many times visual models updated per speed
         (seconds/real second)
         """
+        if self.win.debug_mode:
+            print("Simulation running")
         self.win.simulation_stopped = False
         i = 0
 
@@ -158,6 +206,8 @@ class Simulation(object):
                 i = 0
 
     def stop(self):
+        if self.win.debug_mode:
+            print("Simulation stopped")
         if self.win.simulation_stopped == True:
             pass
         else:

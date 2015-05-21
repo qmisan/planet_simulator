@@ -1,5 +1,5 @@
 # This is simulation state file
 # Tyyppi Nimi position(muodossa: x,y,z)velocity(x,y,z) mass color
-Planet Earth -1,0,0 1,0,0 10 red
+Planet earth -1,0,0 1,0,0 10 red
 #
 Planet Hehe 10,0,0 -1,0,0 10 blue

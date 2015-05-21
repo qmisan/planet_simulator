@@ -30,12 +30,15 @@ class MainWindow(window):
     state_saved = False
     scene = None
     simulation_stopped = False
+    debug_mode=False
 
     # Datapanel
     datapanel = None
 
-    def __init__(self, title):
-
+    def __init__(self, title, debug=False):
+        self.debug_mode = debug
+        if self.debug_mode:
+            print("Initializing main window...")
         # Frame initialization
         # Get local display size NOTE: Local display size not needed if always fullscreen
         # local_display_size = wx.GetDisplaySize()
@@ -54,8 +57,11 @@ class MainWindow(window):
         self.SetDisplay()
         self.SetStart()
         self.SetCheckBox()
+        if self.debug_mode:
+            print("...done(main window)!")
     def SetMenubar(self):
-
+        if self.debug_mode:
+            print("Setting menubar...")
         #File menu for basic menu functionality
         filemenu = wx.Menu()
 
@@ -94,9 +100,11 @@ class MainWindow(window):
         # --------------------------------
         # Adding ready menubar to frame
         self.win.SetMenuBar(menuBar)  # Adding menuBar to frame
-
+        if self.debug_mode:
+            print("...done!")
     def SetToolbar(self):
-
+        if self.debug_mode:
+            print("Setting toolbar...")
         # Init toolbar
         toolbar = self.win.CreateToolBar()
         toolbar.SetToolBitmapSize((20, self.toolbarheight))  # Button size in pixels?
@@ -119,12 +127,15 @@ class MainWindow(window):
         # self.win.Bind(wx.EVT_CHECKBOX, self.ShowOrHideLabels)
 
         toolbar.Realize()  # IDIOT U FORGOT TO SHOW IT!!!!!
-
+        if self.debug_mode:
+            print("...done!")
     def SetStatusbar(self):
         pass
 
     def OnAbout(self, event):
         """Show about dialog box"""
+        if self.debug_mode:
+            print("User pressed About")
         # A message dialog box with an OK button.
         # wx.OK is a standard ID in wxWidgets.
         dlg = wx.MessageDialog(self.win, "Planet simulator version 1.0\nFor more documentation read Documentation\Project_document.pdf ",
@@ -134,6 +145,8 @@ class MainWindow(window):
 
     def OnOpen(self, event):
         """ Load state from file """
+        if self.debug_mode:
+            print("User pressed open")
         # TODO: If simulation already loaded ask if want open new one without saving dialog
         # if not self.simulation == None:
 
@@ -150,7 +163,6 @@ class MainWindow(window):
             # Now we have path to selected file
             self.simulation = Simulation(self)
             self.simulation.load(os.path.join(self.dirname, self.filename))
-            self.simulation.space.print_elements()
             self.SetDataPanel()
 
             # Makes display for visualization
@@ -169,6 +181,8 @@ class MainWindow(window):
 
     def OnSaveAs(self, event):
 
+        if self.debug_mode:
+            print("User pressed save")
         # TODO: DialogBox to ask if user wants to save already saved material
         # MessageBox telling that state has already been saved
         # Asks if user wants to save to different location
@@ -193,7 +207,8 @@ class MainWindow(window):
         saveFileDialog.Destroy()
 
     def OnExit(self, event):
-
+        if self.debug_mode:
+            print("User pressed Exit")
         # Save before exit dialog
         if self.state_saved == False:
             dlg = wx.MessageDialog(self.win,
@@ -222,6 +237,8 @@ class MainWindow(window):
         to ask user simulation run parameters
         @para
         """
+        if self.debug_mode:
+            print("User pressed Run")
 
         if not self.simulation_stopped == True:
             self.simulation_speed = 0
@@ -246,7 +263,10 @@ class MainWindow(window):
                 self.simulation_speed = int(dlg.GetValue())
                 if not isinstance(self.simulation_speed, int):
                     pass
-                    # raise WrongSimulationParameterError("")
+            else:
+                if self.debug_mode:
+                    print("User pressed cancel")
+                return   # raise WrongSimulationParameterError("")
 
             # Asking simulation speed
             dlg2 = wx.TextEntryDialog(None, "Set timestep (seconds)", "Run")
@@ -257,6 +277,10 @@ class MainWindow(window):
                 if not isinstance(self.simulation_timestep, int):
                     pass
                     # raise WrongSimulationParameterError("")
+            else:
+                if self.debug_mode:
+                    print("User pressed cancel")
+                return   # raise WrongSimulationParameterError("")
 
             # Asking rendering frequency
             dlg3 = wx.TextEntryDialog(None, "Set rendering frequency", "Run")
@@ -267,6 +291,10 @@ class MainWindow(window):
                 if not isinstance(self.frequency, int):
                     pass
                     # raise WrongSimulationParameterError("")
+            else:
+                if self.debug_mode:
+                    print("User pressed cancel")
+                return   # raise WrongSimulationParameterError("")
 
             self.simulation.run(self.simulation_speed, self.simulation_timestep, self.frequency)
 
@@ -275,6 +303,9 @@ class MainWindow(window):
             self.simulation.run(self.simulation_speed, self.simulation_timestep, self.frequency)
 
     def OnPause(self, event):
+        if self.debug_mode:
+            print("User pressed Pause")
+
         if self.simulation == None or self.simulation_stopped == True:
             pass
         else:
@@ -282,10 +313,13 @@ class MainWindow(window):
 
 
     def SetDisplay(self):
+        if self.debug_mode:
+            print("Setting display...")
         # Display
         self.scene = display(window=self, width=0.8*self.screen_size[0],
                              height = 0.8*self.screen_size[1], autoscale=True)
-
+        if self.debug_mode:
+            print("...done!")
     def SetStart(self):
         # Backgroundcolor to white
         # self.scene.background(color.white)
@@ -307,10 +341,8 @@ class MainWindow(window):
         # NOTE: This could be in toolbar
         print(self.screen_size)
         cb = wx.CheckBox(self.panel, label="Labels", pos=(200,int(self.screen_size[1]*0.83)))
-
-
         cb.Bind(wx.EVT_CHECKBOX, self.ShowOrHideLabels)
-
+        cb.SetValue(True)
     def ShowOrHideLabels(self, event):
         sender = event.GetEventObject()
         isChecked = sender.GetValue()
@@ -348,7 +380,8 @@ class MainWindow(window):
                                 pos = (0,i*100+L))
             # sizer.Add(button, wx.EXPAND|wx.ALL)
             def OnButton(self, event, center_element=element):
-                print("U pressed:"+element.label)
+                if self.debug_mode:
+                    print("User pressed: "+element.label+" centering")
                 self.simulation.center(element)
 
             button.Bind(wx.EVT_BUTTON, OnButton)

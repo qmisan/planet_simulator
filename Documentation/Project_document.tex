@@ -140,13 +140,54 @@ Ohjelmassa käytetään muutamaa fysiikan kaavaa laskemaan kappaleiden välisiä voim
 \item[Kiihtyvyys]
 \[\bar{F}=m\bar{a}\]
 \\
-Lisäksi
 
 \end{itemize}
-
+\pagebreak
 \section*{Tiedostot}
+Ohjelma pystyy parsimaan simulaatiotiedot tekstitiedostosta. Parsiminen tapahtuu oheisella koodilla.
+%Load from file code
+\begin{verbatim}
+with open(file) as f:
+    data = f.readlines()
+    for line in data:
+        if not line.startswith("#"):
+            line_data = line.split()
 
+            # If type planet
+            if line_data[0].strip().lower() == "planet":
+                label = line_data[1]
+                vec = line_data[2].split(",")
+                position = vector(float(vec[0]), float(vec[1]),
+                                  float(vec[2]))
+                vec = line_data[3].split(",")
+                velocity = vector(float(vec[0]), float(vec[1]),
+                                  float(vec[2]))
+                mass = float(line_data[4])
+                line_data[5].strip("\n")
+                clr = Element.colors[line_data[5]]
+                new_element = Planet(label, position, velocity,
+                                     mass, clr)
+                self.add(new_element)
+\end{verbatim}
+Tiedostoon kirjoitus on hieman yksinkertaisempi operaatio:
+\begin{verbatim}
+f = open(file, "w")
+f.write("# This is simulation state file\n")
+f.write("# Tyyppi label position(muodossa: x,y,z)"
+        "velocity(x,y,z) mass color\n")
+for element in self.space.element_list:
+    f.write(element.type + " " +
+            element.label + " " +
+            str(element.position.x)+","+str(element.position.y)+","
+            + str(element.position.y) + " " +
+            str(element.velocity.x)+","+str(element.velocity.y)+","
+            + str(element.velocity.y)+" "+str(element.mass) + " " +
+            element.get_color() + "\n")
+f.close()
+
+\end{verbatim}
 \section*{Testaus}
+Testaus tiedostot sijaitsevat /src/ kansiossa. Ne voi ajaa painamalla test.bat tiedostoa.
 
 \section*{Ohjelman tunnetut puutteet ja viat}
 % Tähän myös 3 parasta ja heikointa kohtaa
@@ -158,7 +199,10 @@ Lisäksi
 \section*{Yhteenveto}
 
 \section*{Viitteet}
-
-																																				
+\url{http://www.vpython.org/contents/docs/index.html}
+\\
+\url{http://www.stackoverflow.com}
+\\
+\url{}																																				
 %dokumentti lopetetaan
 \end{document}

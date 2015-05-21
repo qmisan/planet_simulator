@@ -5,16 +5,19 @@ class Star(Element):
     """
     docstring for Star
     """
-    def __init__( self, label, position, velocity, mass):
+    # Not on init
+    type = "Star" # Made always for this type, used in element __str__
+    space = None
+    visual = None
+    radius = 3
 
-        self.color = color.yellow
-        self.type = "Star" # Made always for this type, used in element __str__
-        self.visualization = None
+    def __init__( self, label, position, velocity, mass, color=color.yellow):
+
+        self.color = color
         self.label = label
         self.position = position # Vector value from origon
         self.velocity = velocity # Vector value
         self.mass = mass
-        self.space = None
 
         self.acceleration = vector(0,0,0)
         self.next_pos = self.position
