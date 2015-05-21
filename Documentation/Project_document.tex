@@ -12,6 +12,7 @@
 \usepackage{hyperref}
 %\usepackage{pgfplots} %kuvaajien piirtämiseen, ota kommentointi pois mikäli haluat käyttää
 
+
 \pagestyle{empty} %ei numeroita sivulle, mikäli niitä silti ilmestyy niin käytä komentoa \thispagestyle{empty} näillä sivuilla. Ei meinaa jostain syystä toimia report luokan kanssa
 \setlength{\parindent}{0mm} %ei sisennystä uusiin kappaleisiin
 \setlength{\emergencystretch}{15pt} %tekstin muokkaamiseen eli sallii välien venytyksen riveillä jotta näyttää paremmalta
@@ -119,8 +120,9 @@ Näkymän ohjauspaneeli ilmestyy kun sopiva simulointitiedosto on ladattu. Siinä n
 \pagebreak
 
 \section*{Ohjelman rakenne}
-Ohjelma koostuu main- functiosta ja kahdesta eri moduulista - Simulation ja GUI.
-
+Src kansion alta koostuva ohjelman lähdekoodi koostuu main- functiosta ja kahdesta eri moduulista - Simulation ja GUI.
+\\
+\includegraphics[scale = 0.5]{simu10}
 
 \subsection*{Simulation}
 Simulation-moduuli sisältää ohjelman simulointi-osuuden - avaruuden sen kappaleet ja niiden visualisointi. Simulointi sisältää myös fysiikka-laskuihin tarvittavat funktiot sekä simulaation parsimisen tiedostosta.
@@ -131,7 +133,6 @@ Simulation-moduuli sisältää ohjelman simulointi-osuuden - avaruuden sen kappalee
 GUI-moduuli sisältää ohjelman käyttöliittymään liittyvät osat. GUI-moduuli käyttää kutsuu simulaatiota.
 \\
 \includegraphics[scale = 0.5]{simu8}
-
 \pagebreak
 
 
@@ -143,9 +144,25 @@ Ohjelmassa käytetään muutamaa fysiikan kaavaa laskemaan kappaleiden välisiä voim
 \[\bar{F}=G\frac{m_1m_2}{d^2}\]
 \item[Kiihtyvyys]
 \[\bar{F}=m\bar{a}\]
-\\
-
 \end{itemize}
+Fysiikan päivityksestä piirtämiseen mennään seuraavalla kierrolla:
+\begin{verbatim}
+Simulation run 
+----> space calculate
+---------> for each element calculate next
+\end{verbatim}
+Tämän jälkeen kaikki päivitetään uuteen sijaintiinsa:
+\begin{verbatim}
+(Simulation run) 
+----> space update
+---------> for each element update
+\end{verbatim}
+Ruutu päivitetään run-komennolle annetun \emph{frequency} parametrin avulla, käytännössä taajuudella tarkoitetaan kuinka monta kertaa sekunnissa ruudunpäivitys suoritetaan.
+\begin{verbatim}
+(simulation run)
+---->If full second:
+--------->render visuals
+\end{verbatim} 
 \pagebreak
 \section*{Tiedostot}
 Ohjelma pystyy parsimaan simulaatiotiedot tekstitiedostosta. Parsiminen tapahtuu oheisella koodilla.
@@ -191,12 +208,26 @@ f.close()
 
 \end{verbatim}
 \section*{Testaus}
-Testaus tiedostot sijaitsevat /src/ kansiossa. Ne voi ajaa painamalla test.bat tiedostoa.
+Testaus tiedostot sijaitsevat /src/ kansiossa. Ne voi ajaa painamalla test.bat tiedostoa. Yksikkötestit kattavat fysiikkamoottorin, simulaation ja elementit. Testausta varten tein ohjelmaan myös debug-moden, jossa ohjelma kirjoittaa ajonaikaisia kommentteja konsoliin. Tämän moden voi ajaa juuri kansion test-run.batista.
 
+\includegraphics[scale=0.4]{simu11}
+\pagebreak
 \section*{Ohjelman tunnetut puutteet ja viat}
 % Tähän myös 3 parasta ja heikointa kohtaa
-
-\section*{Poikkeamat suunnitelmasta}
+Ohjelmassa on vielä paljon kehitettävää, mutta siinä on myös mielestäni erittäin hyviä puolia. 3D-visualisointi on suhteellisen näyttävä ja fysiikka on moduulimuotoisena myös kehitettävissä. Hyvää on myös parametrinä annettava simulointi nopeus ja timestep jotka mahdollistavat muuten hyvin hitaasti tapahtuvan simuloinnin nopeuttamisen. Erityisesti olen koodissa ylpeä näkymän hallinta paneelista joka dynaamisesti luo näppäimet ja funktiot kullekkin simulaation elementille.
+Ohjelman kehitettävistä puolista mainitsen samaisen näkymän hallinta paneelista, sillä sen tila on rajallinen. Paneeli elementti tulisi muuttaa esim rullattavaksi, jotta siihen mahtuisi enemmän kappaleita. Lisäksi ohjelman staattinen ikkunakoko (ei skaalaudu pienentäessä) on miinus. Käytin paljon aikaa muutettavan koon toteuttamiseen, mutta käyttämäni kirjastot eivät pelanneet yhteen ja jouduin luopumaan ajatuksesta. 
+\begin{itemize}
+\item[Plussat]\begin{itemize}
+\item[+] 3D-visualisointi kokonaisuudessaan
+\item[+] 
+\item[+] Laajennettavuus
+\end{itemize}
+\item[Miinukset]\begin{itemize}
+\item[-] asdf
+\item[-] Näkymän hallintapaneelin rajallinen koko
+\item[-] Skaalaaminen
+\end{itemize}
+\end{itemize}
 
 \section*{Aikataulu}
 
@@ -207,6 +238,6 @@ Testaus tiedostot sijaitsevat /src/ kansiossa. Ne voi ajaa painamalla test.bat t
 \\
 \url{http://www.stackoverflow.com}
 \\
-\url{}																																				
+\url{zet}																																				
 %dokumentti lopetetaan
 \end{document}
