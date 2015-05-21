@@ -4,4 +4,4 @@ echo Running tests:
 python test_physics.py
 python test_simulation.py
 PAUSE
-python main.py
+python main_debug.py
