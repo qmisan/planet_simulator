@@ -70,14 +70,14 @@ simulaattorilla pystyy simuloimaan planeettojen liikettä avaruudessa kun aika ku
 \linebreak{}		
 \includegraphics[scale = 0.2]{simu1}		
 \linebreak{}
-Toteutus seuraa suurimmilta osin suunnitelmaa, mutta lisäominaisuuksia on jäänyt liuta pois johtuen ajankäytöllisistä syistä. 3D-visualisointi kirjasjon yhteensopivuusongelmat käyttöliittymäkirjastojen kanssa veivät suuren osan projektin toteutusajasta. Projekti on kokonaisuudessaan ollut vaativa, mutta suunnitelma huomioon ottaen mielestäni sen onnistuminen on vain tyydyttävä.
+Toteutus seuraa suurimmilta osin suunnitelmaa, mutta ominaisuuksia on jäänyt jonkin verran pois johtuen ajankäytöllisistä syistä. 3D-visualisointi kirjaston yhteensopivuusongelmat käyttöliittymäkirjastojen kanssa veivät suuren osan projektin toteutusajasta. Projekti on kokonaisuudessaan ollut minulle opettavainen ja vaativa.
 
 \pagebreak
 								
 \section*{Käyttöohje}
 \subsection*{Kirjasto ja käynnistys}
 Ohjelma vaatii toimiakseen VPython moduulin ja Pythonista version 2.7. Molemmat näistä voi ladata suoraan osoitteesta  \url{ http://www.vpython.org/contents/download_windows.html}.
-Kun nämä on asennettu voi ohjelman ajaa suoraan tuplaklikkaamalla `run.bat' tiedostoa ohjelman juurikansiossa. Klikkaamalla `test-run.bat' ohjelma käynnistyy käytyään yksikkötestit läpi.
+Kun nämä on asennettu voi ohjelman ajaa suoraan tuplaklikkaamalla `run.bat' tiedostoa ohjelman juurikansiossa. Klikkaamalla `test-run.bat' ohjelma käynnistyy \emph{debug}-tilaan käytyään yksikkötestit läpi. Debug-tilassa konsoliin tulostuu tietoa ohjelman ajosta.
  \linebreak{}		
 \includegraphics[scale = 0.75]{simu2}
 
@@ -89,7 +89,7 @@ Yläreunasta avautuvasta `File'-valikosta löytyy ohjelman kannalta keskeiset tied
 \includegraphics[scale = 0.75]{simu3}
 \linebreak{}
  Sekä `Open' että `Save as' valikkonäppäimiä käyttäessä avautuu tiedostodialogi-ikkuna, josta tiedostosijainnit on kätevä osoittaa.\\
-\includegraphics[scale = 0.3]{simu5}
+\includegraphics[scale = 0.2]{simu5}
  \pagebreak
 
 \subsection*{Työkalut}
@@ -117,6 +117,7 @@ Näkymän ohjauspaneeli ilmestyy kun sopiva simulointitiedosto on ladattu. Siinä n
 % Kuva
 \includegraphics[scale = 0.3]{simu9}
 \\
+\includegraphics[scale=0.3]{simu12}
 \pagebreak
 
 \section*{Ohjelman rakenne}
@@ -219,20 +220,20 @@ Ohjelman kehitettävistä puolista mainitsen samaisen näkymän hallinta paneelista,
 \begin{itemize}
 \item[Plussat]\begin{itemize}
 \item[+] 3D-visualisointi kokonaisuudessaan
-\item[+] 
+\item[+] Käyttöliittymän ominaisuudet
 \item[+] Laajennettavuus
 \end{itemize}
 \item[Miinukset]\begin{itemize}
-\item[-] asdf
 \item[-] Näkymän hallintapaneelin rajallinen koko
 \item[-] Skaalaaminen
+\item[-] Testejä voisi olla lisää
 \end{itemize}
 \end{itemize}
 
 \section*{Aikataulu}
-
+Sain projektin alkuun erittäin sujuvasti ja suurin osa suunnitellusta aikataulustani piti paikkansa, mutta tuli pari suurempaa vastoinkäymistä jotka veivät varsinkin toteutuksen keskivaiheilta paljon aikaani. Ehdottomasti suurin ongelma oli 3D-ikkunan upottaminen pääikkunaan. Grafiikkakirjastoni käytti pohjanaan wxPython kirjastoa, joten jouduin luopumaan kurssilla suositellusta PyQt kirjastosta alkuunsa. Halusin pitkään vielä tehdä ohjelmastani venytettävän, eli \emph{Sizereita} käyttämällä ohjelman eri paneelit reagoisivat automaattisesti koonmuutos tapahtumaan. Kaikki muu toimikin hyvin, mutta 3D-ikkuna ei vain suostunut näkymään sizerissa. Internetistä ei löytynyt aiheeseen juuri mitään apuja ja ainut vaihtoehto olisi ollut modata käyttämääni kirjastoa ja se olisi ollut turhan iso taakka tähän projektiin. Muuten pysyin suht hyvin aikataulussani, mutta jouduin jättämään ajanpuutteen vuoksi suunnittelemiani lisäominaisuuksia pois.
 \section*{Yhteenveto}
-
+Kokonaisuudessaan olen ohjelma-projektiini tyytyväinen. Kyseessä oli ensimmäinen laajempi itse suunnittelemani ja toteuttamani kokonaisuus. Suunnitteluni oli onnistunut ja se edesauttoi toteuttamista hyvin paljon. Lopputulos tekee perusasiansa hyvin, joten kokonaisuutena koen suorituksen itselleni erittäin hyväksi. Projektia tehdessä opin paljon luokkaperinnästä ja uutena tuttavuutena ohjelmoinnin aikana tuli \emph{lambda}-ilmaisu, joka on toinen tapa tehdä funktioita. Tällä toteutin dynaamisen näkymänhallinta paneelini. 
 \section*{Viitteet}
 \url{http://www.vpython.org/contents/docs/index.html}
 \\
